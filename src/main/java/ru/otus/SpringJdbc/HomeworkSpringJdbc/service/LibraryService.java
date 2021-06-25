@@ -1,22 +1,21 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 
 
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.BookBo;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 
 import java.util.List;
 
 public interface LibraryService {
-    void createBook(BookBo book);
+    void createBook(Book book);
 
-    List<BookBo> showAllBooks();
+    List<Book> showAllBooks();
 
 
-//    Book findBookByName(String bookName);
-//
-//    Book findBookByAuthor(String authorName);
-//
-//    Book findBookByGenre(String genre);
-//    void deleteBookById(String id);
-//
-//    void changeBookInfo(String itemToUpdate, String newValue);
+   Book findBookByName(String bookName);
+
+    Book findBookByAuthor(String authorName);
+
+    Book findBookByGenre(String genre);
+    Book deleteBookById(String id);
+
 }

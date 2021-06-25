@@ -1,12 +1,12 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.domain;
 
-public class BookBo {
+public class Book {
     int id; // проверить тип
     String author;
     String name;
     String genre;
 
-    public BookBo(int id, String author, String name, String genre) {
+    public Book(int id, String author, String name, String genre) {
         this.id = id;
         this.author = author;
         this.name = name;

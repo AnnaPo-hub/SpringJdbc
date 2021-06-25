@@ -1,22 +1,24 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.dao;
 
 
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.BookBo;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 
 import java.util.List;
 
 public interface LibraryDao {
-    List<BookBo> getAll();
-//    Book getBookByName(String bookName);
-//
-//    Book getBookByAuthor(String authorName);
-//
-//    Book getBookByGenre(String genre);
-//    Book getBookById(String id);
+    List<Book> getAll();
 
-    int insertBook(BookBo bookBo);
+    Book getBookByName(String bookName);
 
-//    void deleteBookById(String id);
-//
-//    void updateBook(String itemToUpdate, String newValue);
+    Book getBookByAuthor(String authorName);
+
+    Book getBookByGenre(String genre);
+
+    Book getBookById(String id);
+
+    int insertBook(Book book);
+
+    int deleteBookById(String id);
+
+
 }
