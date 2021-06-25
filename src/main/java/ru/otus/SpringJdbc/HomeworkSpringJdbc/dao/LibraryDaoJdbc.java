@@ -1,6 +1,7 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.dao;
 
 
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Component;
@@ -32,6 +33,48 @@ public class LibraryDaoJdbc implements LibraryDao {
 
     }
 
+    @Override
+    public List<Book> getBookByName(String bookName) {
+        final Map<String, Object> params = new HashMap<>(1);
+        params.put("name", bookName);
+        return jdbc.queryForList(" SELECT id, author, name,genre  FROM BOOKS b  where b.name=:bookName", params, new BookMapper());
+    }
+
+    @Override
+    public List<Book> getBookByAuthor(String authorName) {
+        final Map<String, Object> params = new HashMap<>(1);
+        params.put("author", authorName);
+        return jdbc.queryForList(" SELECT id, author, name,genre  FROM BOOKS b  where b.author=:authorName", params, new BookMapper());
+    }
+
+    @Override
+    public List<Book> getBookByGenre(String genre) {
+        final Map<String, Object> params = new HashMap<>(1);
+        params.put("genre", genre);
+        return jdbc.queryForList(" SELECT id, author, name,genre  FROM BOOKS b  where b.genre=:genre", params, new BookMapper());
+    }
+
+    @Override
+    public Book getBookById(String id) {
+        final Map<String, Object> params = new HashMap<>(1);
+        params.put("bookId", id);
+        return jdbc.queryForList(" SELECT id, author, name,genre  FROM BOOKS b  where b.id=:id", params, new BookMapper());
+    }
+
+
+    @Override
+    public int deleteBookById(String id) {
+        return jdbc.getJdbcOperations().update("Delete  FROM BOOKS b  where b.id=?", id);
+
+    }
+
+    private final ResultSetExtractor<List<Book>> resultSetExtractor=
+            JdbcTemplateMapperFactory
+            .new
+
+
+
+
     private static class BookMapper implements RowMapper<Book> {
         @Override
         public Book mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -41,41 +84,5 @@ public class LibraryDaoJdbc implements LibraryDao {
             String genre = resultSet.getString("genre");
             return new Book(id, author, name, genre);
         }
-
-    }
-
-    @Override
-    public Book getBookByName(String bookName) {
-        final Map<String, Object> params = new HashMap<>(1);
-        params.put("name", bookName);
-        return jdbc.queryForObject(" SELECT id, author, name,genre  FROM BOOKS b  where b.name=:bookName", params, new BookMapper());
-    }
-
-    @Override
-    public Book getBookByAuthor(String authorName) {
-        final Map<String, Object> params = new HashMap<>(1);
-        params.put("author", authorName);
-        return jdbc.queryForObject(" SELECT id, author, name,genre  FROM BOOKS b  where b.author=:authorName", params, new BookMapper());
-    }
-
-    @Override
-    public Book getBookByGenre(String genre) {
-        final Map<String, Object> params = new HashMap<>(1);
-        params.put("genre", genre);
-        return jdbc.queryForObject(" SELECT id, author, name,genre  FROM BOOKS b  where b.genre=:genre", params, new BookMapper());
-    }
-
-    @Override
-    public Book getBookById(String id) {
-        final Map<String, Object> params = new HashMap<>(1);
-        params.put("bookId", id);
-        return jdbc.queryForObject(" SELECT id, author, name,genre  FROM BOOKS b  where b.id=:id", params, new BookMapper());
-    }
-
-
-    @Override
-    public int deleteBookById(String id) {
-        return jdbc.getJdbcOperations().update("Delete  FROM BOOKS b  where b.id=?", id);
-
     }
 }

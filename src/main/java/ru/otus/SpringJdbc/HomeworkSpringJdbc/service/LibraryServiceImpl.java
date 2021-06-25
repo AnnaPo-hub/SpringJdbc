@@ -1,10 +1,12 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 
+import org.springframework.stereotype.Service;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.dao.LibraryDao;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 
 import java.util.List;
 
+@Service
 public class LibraryServiceImpl implements LibraryService {
     LibraryDao libraryDao;
 
@@ -38,8 +40,12 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
-    public Book deleteBookById(String id) {
+    public Book findBookById(String id) {
         return libraryDao.getBookById(id);
+    }
 
+    @Override
+    public int deleteBookById(String id) {
+        return libraryDao.deleteBookById(id);
     }
 }
