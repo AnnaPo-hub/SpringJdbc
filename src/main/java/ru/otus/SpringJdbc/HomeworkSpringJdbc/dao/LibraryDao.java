@@ -8,17 +8,17 @@ import java.util.List;
 public interface LibraryDao {
     List<Book> getAll();
 
-    List <Book>  getBookByName(String bookName);
+    List<Book> getBookByName(String bookName);
 
-    List <Book> getBookByAuthor(String authorName);
+    List<Book> getBookByAuthor(String authorName);
 
-    List <Book> getBookByGenre(String genre);
+    List<Book> getBookByGenre(String genre);
 
-   // Book getBookById(String id);
+    Book getBookById(Long id);
 
     int insertBook(Book book);
 
-    int deleteBookById(String id);
+    int deleteBookById(Long id);
 
 
 }

@@ -39,13 +39,13 @@ public class LibraryServiceImpl implements LibraryService {
         return libraryDao.getBookByGenre(genre);
     }
 
-//    @Override
-//    public Book findBookById(String id) {
-//        return libraryDao.getBookById(id);
-//    }
+    @Override
+    public Book findBookById(Long id) {
+        return libraryDao.getBookById(id);
+    }
 
     @Override
-    public int deleteBookById(String id) {
+    public int deleteBookById(Long id) {
         return libraryDao.deleteBookById(id);
     }
 }
