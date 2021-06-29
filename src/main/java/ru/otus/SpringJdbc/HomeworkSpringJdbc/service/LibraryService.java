@@ -10,13 +10,13 @@ public interface LibraryService {
 
     List<Book> showAllBooks();
 
-    Book findBookByName(String bookName);
+    List <Book> findBookByName(String bookName);
 
-    List <Book> findBookByAuthor(String authorName);
+    List<Book> findBookByAuthor(String authorName);
 
-    Book findBookByGenre(String genre);
+    List<Book> findBookByGenre(String genre);
 
-    Book findBookById(String id);
+//    List<Book> findBookById(String id);
 
     int deleteBookById(String id);
 

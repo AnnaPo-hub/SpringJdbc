@@ -1,6 +1,24 @@
 DROP TABLE IF EXISTS BOOKS;
 DROP TABLE IF EXISTS AUTHORS;
 DROP TABLE IF EXISTS GENRES;
-CREATE TABLE AUTHORS(ID BIGINT PRIMARY KEY, NAME VARCHAR(255));
-CREATE TABLE GENRES(ID BIGINT PRIMARY KEY, NAME VARCHAR(255));
-CREATE TABLE BOOKS(ID BIGINT PRIMARY KEY, AUTHOR VARCHAR(255),  NAME VARCHAR(255), GENRE VARCHAR(255));
+
+create table authors(
+id bigserial,
+name varchar(255),
+primary key (id)
+);
+
+create table genres(
+id bigserial,
+name varchar(255),
+primary key (id)
+);
+
+create table books(
+id bigserial,
+name varchar(255),
+author_id bigint references authors(id),
+genre_id bigint references genres(id),
+primary key (id)
+);
+

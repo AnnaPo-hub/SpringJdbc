@@ -24,9 +24,9 @@ public class HomeworkSpringJdbcApplication {
         final List<Book> all = service.showAllBooks();
         System.out.println("все книги в библиотеке: " + all.size());
 
-        service.createBook(new Book(3, "Bluck", "The Wind", "poetry"));
-        final List<Book> all2 = service.showAllBooks();
-        System.out.println("все книги в библиотеке: " + all2.size());
+       // service.createBook(new Book(3, "Bluck", "The Wind", "poetry"));
+//        final List<Book> all2 = service.showAllBooks();
+//        System.out.println("все книги в библиотеке: " + all2.size());
 
         Console.main(args);
 

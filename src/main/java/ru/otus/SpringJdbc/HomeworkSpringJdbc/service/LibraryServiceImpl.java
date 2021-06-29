@@ -25,24 +25,24 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
-    public Book findBookByName(String bookName) {
+    public List<Book> findBookByName(String bookName) {
         return libraryDao.getBookByName(bookName);
     }
 
     @Override
-    public Book findBookByAuthor(String authorName) {
+    public List<Book> findBookByAuthor(String authorName) {
         return libraryDao.getBookByAuthor(authorName);
     }
 
     @Override
-    public Book findBookByGenre(String genre) {
+    public List<Book> findBookByGenre(String genre) {
         return libraryDao.getBookByGenre(genre);
     }
 
-    @Override
-    public Book findBookById(String id) {
-        return libraryDao.getBookById(id);
-    }
+//    @Override
+//    public Book findBookById(String id) {
+//        return libraryDao.getBookById(id);
+//    }
 
     @Override
     public int deleteBookById(String id) {

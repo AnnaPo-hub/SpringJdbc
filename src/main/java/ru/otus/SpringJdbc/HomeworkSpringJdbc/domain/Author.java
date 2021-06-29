@@ -6,6 +6,6 @@ import lombok.Value;
 @Value
 @RequiredArgsConstructor
 public class Author {
-    int id;
+    Long authorId;
     String name;
 }

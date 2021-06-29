@@ -14,7 +14,7 @@ public interface LibraryDao {
 
     List <Book> getBookByGenre(String genre);
 
-    Book getBookById(String id);
+   // Book getBookById(String id);
 
     int insertBook(Book book);
 

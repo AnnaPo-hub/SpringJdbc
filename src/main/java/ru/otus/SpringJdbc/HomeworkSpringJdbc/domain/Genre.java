@@ -1,11 +1,11 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.domain;
 
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 
-@Data
+@Value
 @RequiredArgsConstructor
 public class Genre {
-    int id;
+    Long genreId;
     String name;
 }
