@@ -11,8 +11,8 @@ public class HomeworkSpringJdbcApplication {
 
     public static void main(String[] args) throws SQLException {
 
-       SpringApplication.run(HomeworkSpringJdbcApplication.class, args);
-  //      LibraryService service = context.getBean(LibraryService.class);
+        SpringApplication.run(HomeworkSpringJdbcApplication.class, args);
+        //      LibraryService service = context.getBean(LibraryService.class);
 //        final Book bookById = service.findBookById((long) 10);
 //        System.out.println(bookById);
 
