@@ -3,7 +3,6 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 
 import java.sql.SQLException;
 
@@ -12,7 +11,7 @@ public class HomeworkSpringJdbcApplication {
 
     public static void main(String[] args) throws SQLException {
 
-        ApplicationContext context = SpringApplication.run(HomeworkSpringJdbcApplication.class, args);
+       SpringApplication.run(HomeworkSpringJdbcApplication.class, args);
   //      LibraryService service = context.getBean(LibraryService.class);
 //        final Book bookById = service.findBookById((long) 10);
 //        System.out.println(bookById);

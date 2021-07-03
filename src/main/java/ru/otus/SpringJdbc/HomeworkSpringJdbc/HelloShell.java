@@ -33,7 +33,7 @@ public class HelloShell {
 
     @ShellMethod(value = "findBookByGenre", key = {"findByGender", "fg"})
     public List<Book> findBookByGenre(String genre) {
-        return service.findBookByAuthor(genre);
+        return service.findBookByGenre(genre);
     }
 
     @ShellMethod(value = "findBookById", key = {"findById", "fi"})
