@@ -19,6 +19,4 @@ public interface LibraryDao {
     int insertBook(Book book);
 
     int deleteBookById(Long id);
-
-
 }

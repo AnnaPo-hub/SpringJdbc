@@ -94,6 +94,3 @@ class BookResultSetExtractor implements ResultSetExtractor<Map<Long, Book>> {
         return books;
     }
 }
-
-
-

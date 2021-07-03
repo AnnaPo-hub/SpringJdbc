@@ -48,10 +48,4 @@ public class HelloShell {
     public int deleteBookById(Long id) {
         return service.deleteBookById(id);
     }
-
-//    @ShellMethod(value = "Start the questionnaire", key = {"start", "s"})
-//    @ShellMethodAvailability(value = "isLoginUser")
-//    public void startQuestionnaire() {
-//        service.startQuestionnaire(userName.replace("Привет, ", ""));
-//    }
 }
