@@ -40,7 +40,7 @@ class LibraryServiceImplTest {
 
     @Test
     void shouldCreateBook() {
-        libraryService.createBook(bookToAdd);
+        libraryService.createBook("The poems", "Blok", "Poetry");
         libraryService.findBookById((long) 3);
         Assertions.assertEquals(bookToAdd, libraryService.findBookById((long) 3));
     }
@@ -53,7 +53,7 @@ class LibraryServiceImplTest {
     @Test
     void shouldFindBookByName() {
         final List<Book> the_lady_unknown = libraryService.findBookByName("The lady unknown");
-        Assertions.assertTrue(the_lady_unknown.contains(existingBook1));
+        Assertions.assertTrue(the_lady_unknown.contains(existingBook2));
     }
 
     @Test
@@ -69,7 +69,7 @@ class LibraryServiceImplTest {
     @Test
     void shouldFindBookById() {
         final Book bookById = libraryService.findBookById((long) 2);
-        assertThat(bookById, is(equalTo(existingBook1)));
+        assertThat(bookById, is(equalTo(existingBook2)));
     }
 
     @Test

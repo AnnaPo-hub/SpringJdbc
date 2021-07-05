@@ -15,8 +15,8 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
-    public void createBook(Book book) {
-        libraryDao.insertBook(book);
+    public void createBook(String bookName, String author, String genre) {
+        libraryDao.insertBook(bookName, author, genre);
     }
 
     @Override

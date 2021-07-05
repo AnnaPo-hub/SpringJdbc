@@ -1,7 +1,6 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.dao;
 
 
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 
 import java.util.List;
@@ -17,11 +16,12 @@ public interface LibraryDao {
 
     Book getBookById(Long id);
 
-    int insertBook(Book book);
+    int insertBook(String bookName, String author, String genre);
 
     int deleteBookById(Long id);
 
-    void insertAuthor(String authorName, NamedParameterJdbcOperations jdbc);
-    void insertGenre(String genreName,NamedParameterJdbcOperations jdbc);
+    Long insertAuthor(String authorName);
+
+    Long insertGenre(String genreName);
 
 }

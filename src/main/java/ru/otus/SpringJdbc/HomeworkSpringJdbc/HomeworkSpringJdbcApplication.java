@@ -3,6 +3,7 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.sql.SQLException;
 
@@ -11,7 +12,9 @@ public class HomeworkSpringJdbcApplication {
 
     public static void main(String[] args) throws SQLException {
 
-        SpringApplication.run(HomeworkSpringJdbcApplication.class, args);
-        // Console.main(args);
+        final ConfigurableApplicationContext context = SpringApplication.run(HomeworkSpringJdbcApplication.class, args);
+
+
     }
 }
+

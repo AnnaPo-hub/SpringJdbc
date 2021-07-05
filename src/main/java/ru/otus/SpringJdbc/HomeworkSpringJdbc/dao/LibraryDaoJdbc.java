@@ -24,11 +24,14 @@ public class LibraryDaoJdbc implements LibraryDao {
         return new ArrayList<>(Objects.requireNonNull(query.values()));
     }
 
+
     @Override
-    public int insertBook(Book book) {
-        return jdbc.update("insert into books(id, name, author_id, genre_id)values(:id, :name, :author_id,:genre_id)",
-                Map.of("id", book.getId(), "name", book.getName(), "author_id", book.getAuthor().getAuthorId(),
-                        "genre_id", book.getGenre().getGenreId()));
+    public int insertBook(String bookName, String author, String genre) {
+        final Long authorId = insertAuthor(author);
+        final Long genreId = insertGenre(genre);
+        return jdbc.update("insert into books(name, author_id, genre_id)values(:name, :author_id,:genre_id)",
+                Map.of("name", bookName, "author_id", authorId,
+                        "genre_id", genreId));
     }
 
     @Override
@@ -73,23 +76,22 @@ public class LibraryDaoJdbc implements LibraryDao {
     }
 
     @Override
-    public void insertAuthor(String authorName, NamedParameterJdbcOperations jdbc) {
+    public Long insertAuthor(String authorName) {
         if (DbUtils.findAuthor(jdbc, authorName) == null) {
             Map<String, String> params = new HashMap<>();
             params.put("authorName", authorName);
             jdbc.update("insert into authors (name) values (:authorName)", params);
         }
+        return DbUtils.findAuthor(jdbc, authorName);
     }
 
     @Override
-    public void insertGenre(String genreName, NamedParameterJdbcOperations jdbc) {
+    public Long insertGenre(String genreName) {
         if (DbUtils.findGenre(jdbc, genreName) == null) {
             Map<String, String> params = new HashMap<>();
             params.put("genreName", genreName);
             jdbc.update("insert into genres (name) values (:genreName)", params);
         }
+        return DbUtils.findGenre(jdbc, genreName);
     }
 }
-
-
-

@@ -33,7 +33,7 @@ public class Mappers {
         }
     }
 
-   public static class BookResultSetExtractor implements ResultSetExtractor<Map<Long, Book>> {
+    public static class BookResultSetExtractor implements ResultSetExtractor<Map<Long, Book>> {
         @Override
         public Map<Long, Book> extractData(ResultSet rs) throws SQLException, DataAccessException {
             Map<Long, Book> books = new HashMap<>();

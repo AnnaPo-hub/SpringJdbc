@@ -2,9 +2,7 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc;
 
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.LibraryService;
 
 import java.util.List;
@@ -19,9 +17,8 @@ public class HelloShell {
     }
 
     @ShellMethod(value = "createBook", key = {"create", "c"})
-    public void createBook(long id, String bookName, String author,  String genre ) {
-        Book book = new Book(id, bookName, new Author((long)1, author), new Genre((long)1, genre));
-        service.createBook(book);
+    public void createBook( String bookName, String author,  String genre ) {
+        service.createBook(bookName, author, genre);
     }
 
     @ShellMethod(value = "findBookByName", key = {"findByName", "fn"})

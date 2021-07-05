@@ -6,7 +6,7 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import java.util.List;
 
 public interface LibraryService {
-    void createBook(Book book);
+    void createBook(String bookName, String author, String genre);
 
     List<Book> showAllBooks();
 
@@ -19,5 +19,4 @@ public interface LibraryService {
     Book findBookById(Long id);
 
     int deleteBookById(Long id);
-
 }
