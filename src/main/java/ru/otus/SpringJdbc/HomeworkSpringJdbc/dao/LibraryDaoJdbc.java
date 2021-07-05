@@ -23,7 +23,7 @@ public class LibraryDaoJdbc implements LibraryDao {
 
     @Override
     public List<Book> getAll() {
-        final Map<Long, Book> query = jdbc.query(" select b.id, b.name as book_name, a.name as author_name, a.id as author_id, g.name as genre_name, g.id as genre_id  from books b left join authors a on b.author_id=a.id " +
+        final Map<Long, Book> query = jdbc.query(" select b.id, b.book_name, a.author_name, a.id as author_id, g.genre_name, g.id as genre_id  from books b left join authors a on b.author_id=a.id " +
                 "left join genres g on b.genre_id=g.id", new BookResultSetExtractor());
         return new ArrayList<>(Objects.requireNonNull(query.values()));
     }
@@ -31,8 +31,8 @@ public class LibraryDaoJdbc implements LibraryDao {
     @Override
     public int insertBook(Book book) {
         return jdbc.update("insert into books(id, name, author_id, genre_id)values(:id, :name, :author_id,:genre_id)",
-                Map.of("id", book.getId(), "name", book.getName(), "author_id", book.getAuthor().getAuthorId(),
-                        "genre_id", book.getGenre().getGenreId()));
+                Map.of("id", book.getId(), "name", book.getName(), "author_id", book.getAuthor().getId(),
+                        "genre_id", book.getGenre().getId()));
     }
 
     @Override

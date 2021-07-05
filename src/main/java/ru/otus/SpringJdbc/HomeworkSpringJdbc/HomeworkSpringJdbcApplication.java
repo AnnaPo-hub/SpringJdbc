@@ -1,8 +1,10 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc;
 
 
+import org.h2.tools.Console;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.sql.SQLException;
 
@@ -11,8 +13,13 @@ public class HomeworkSpringJdbcApplication {
 
     public static void main(String[] args) throws SQLException {
 
-        SpringApplication.run(HomeworkSpringJdbcApplication.class, args);
-        //      LibraryService service = context.getBean(LibraryService.class);
+        final ConfigurableApplicationContext context = SpringApplication.run(HomeworkSpringJdbcApplication.class, args);
+//        Genre testGenre = new Genre((long)2, "Non-fiction");
+//        Author testAuthor = new Author((long)2, "William Nilson");
+//
+//        LibraryService service = context.getBean(LibraryService.class);
+//        service.createBook(new Book((long)4, "Woo",testAuthor, testGenre));
+//        service.createBook(new Book((long)5, "Woobe",testAuthor, testGenre));
 //        final Book bookById = service.findBookById((long) 10);
 //        System.out.println(bookById);
 
@@ -33,7 +40,7 @@ public class HomeworkSpringJdbcApplication {
 //        final List<Book> all2 = service.showAllBooks();
 //        System.out.println("все книги в библиотеке: " + all2.size());
 
-        // Console.main(args);
+        Console.main(args);
 
     }
 }

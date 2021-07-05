@@ -1,18 +1,18 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.domain;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.Value;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "genre")
 @Value
-@RequiredArgsConstructor
+@AllArgsConstructor
+@Table(name = "genres")
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long genreId;
-    @Column(name = "genre_name")
+    Long id;
+    @Column(name = "name")
     String name;
 }
