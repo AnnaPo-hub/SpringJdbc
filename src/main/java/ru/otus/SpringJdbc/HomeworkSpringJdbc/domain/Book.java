@@ -1,14 +1,16 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Value;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Value
+@Data
 @AllArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "books")
 public class Book {
     @Id
@@ -17,16 +19,16 @@ public class Book {
     @Column(name = "name")
     String name;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Author.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Author.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     Author author;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Genre.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Genre.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "genre_id")
     Genre genre;
 
-    @OneToOne(fetch = FetchType.LAZY, targetEntity = Comment.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "comment_id")
+    @OneToOne(fetch = FetchType.EAGER, targetEntity = Comment.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "comment_id",nullable = true)
     List<Comment> comments;
 
 }

@@ -1,13 +1,15 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Value;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
-@Value
+@Data
 @AllArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "genres")
 public class Genre {
     @Id

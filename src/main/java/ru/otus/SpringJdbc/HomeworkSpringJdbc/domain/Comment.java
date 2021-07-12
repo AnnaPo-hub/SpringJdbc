@@ -1,14 +1,16 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Value;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Value
+@Data
 @AllArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "comments")
 public class Comment {
     @Id

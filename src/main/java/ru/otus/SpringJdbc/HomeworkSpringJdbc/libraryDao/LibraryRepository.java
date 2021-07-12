@@ -1,7 +1,7 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao;
 
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 
 import javax.persistence.EntityManager;
@@ -11,14 +11,19 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Repository
 public class LibraryRepository implements LibraryDao {
     @PersistenceContext
     private EntityManager em;
 
+    public LibraryRepository(EntityManager em) {
+        this.em = em;
+    }
+
+
     @Override
     public List<Book> getAll() {
-        TypedQuery<Book> query = em.createQuery("select b from books b", Book.class);
+        TypedQuery<Book> query = em.createQuery("select b from Book b", Book.class);
         return query.getResultList();
     }
 
@@ -33,18 +38,24 @@ public class LibraryRepository implements LibraryDao {
     }
 
     @Override
-    public Optional<Book> getBookByName(String name) {
-        return Optional.ofNullable(em.find(Book.class, name));
+    public List<Book> getBookByName(String name) {
+        TypedQuery<Book> query = em.createQuery("select b from Book b where b.name=:name", Book.class);
+        query.setParameter("name", name);
+        return query.getResultList();
     }
 
     @Override
-    public Optional<Book> getBookByAuthor(String authorName) {
-        return Optional.ofNullable(em.find(Book.class, authorName));
+    public List<Book> getBookByAuthor(String name) {
+        TypedQuery<Book> query = em.createQuery("select b from Book b where b.author=(select a.id from Author a where a.name = :name)", Book.class);
+        query.setParameter("name", name);
+        return query.getResultList();
     }
 
     @Override
-    public Optional<Book> getBookByGenre(String genre) {
-        return Optional.ofNullable(em.find(Book.class, genre));
+    public List<Book> getBookByGenre(String genre) {
+        TypedQuery<Book> query = em.createQuery("select b from Book b where b.genre=(select g.id from Genre g where g.name = :genre)", Book.class);
+        query.setParameter("genre", genre);
+        return query.getResultList();
     }
 
     @Override
@@ -54,7 +65,7 @@ public class LibraryRepository implements LibraryDao {
 
     @Override
     public void deleteBookById(Long id) {
-        Query query = em.createQuery("delete from Books b where b.id = :id");
+        Query query = em.createQuery("delete from Book b where b.id = :id");
         query.setParameter("id", id);
         query.executeUpdate();
     }
