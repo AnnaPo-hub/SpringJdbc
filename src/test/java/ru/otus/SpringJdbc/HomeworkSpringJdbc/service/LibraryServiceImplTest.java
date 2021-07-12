@@ -7,9 +7,10 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.context.annotation.Import;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.dao.LibraryDaoJdbc;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao.LibraryRepository;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
 
 import java.util.ArrayList;
@@ -21,16 +22,18 @@ import static org.hamcrest.Matchers.is;
 
 @JdbcTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@Import({LibraryDaoJdbc.class, LibraryServiceImpl.class})
+@Import({LibraryRepository.class, LibraryServiceImpl.class})
 class LibraryServiceImplTest {
+    List<Comment> comments;
 
-    Book bookToAdd = new Book((long) 3, "The poems", new Author((long) 1, "Blok"), new Genre((long) 1, "Poetry"));
-    Book existingBook1 = new Book((long) 1, "The dark Maiden", new Author((long) 1, "Blok"), new Genre((long) 1, "Poetry"));
-    Book existingBook2 = new Book((long) 2, "The lady unknown", new Author((long) 1, "Blok"), new Genre((long) 1, "Poetry"));
+    Book bookToAdd = new Book((long) 3, "The poems", new Author((long) 1, "Blok"), new Genre((long) 1, "Poetry"),comments);
+    Book existingBook1 = new Book((long) 1, "The dark Maiden", new Author((long) 1, "Blok"), new Genre((long) 1, "Poetry"),comments);
+    Book existingBook2 = new Book((long) 2, "The lady unknown", new Author((long) 1, "Blok"), new Genre((long) 1, "Poetry"),comments);
     List<Book> library = new ArrayList<>();
 
     @BeforeAll
     void setUp() {
+        comments.add(new Comment((long)1, "Good book"));
         library.add(existingBook1);
         library.add(existingBook2);
     }

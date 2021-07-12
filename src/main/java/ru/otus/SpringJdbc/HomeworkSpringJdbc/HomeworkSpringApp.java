@@ -9,11 +9,11 @@ import org.springframework.context.ConfigurableApplicationContext;
 import java.sql.SQLException;
 
 @SpringBootApplication
-public class HomeworkSpringJdbcApplication {
+public class HomeworkSpringApp {
 
     public static void main(String[] args) throws SQLException {
 
-        final ConfigurableApplicationContext context = SpringApplication.run(HomeworkSpringJdbcApplication.class, args);
+        final ConfigurableApplicationContext context = SpringApplication.run(HomeworkSpringApp.class, args);
 //        Genre testGenre = new Genre((long)2, "Non-fiction");
 //        Author testAuthor = new Author((long)2, "William Nilson");
 //

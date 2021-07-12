@@ -1,7 +1,7 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 
 import org.springframework.stereotype.Service;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.dao.LibraryDao;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao.LibraryDao;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 
 import java.util.List;
