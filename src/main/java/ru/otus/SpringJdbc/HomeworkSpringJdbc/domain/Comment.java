@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Value;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Value
@@ -13,6 +14,8 @@ public class Comment {
     @Id
     @GeneratedValue
     Long id;
+    @Column (name = "date")
+    LocalDate date;
     @Column(name = "comment")
     String comment;
 }

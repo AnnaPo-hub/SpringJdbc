@@ -13,13 +13,13 @@ public class CommentsRepository implements CommentDao {
     private EntityManager em;
 
     @Override
-    public List<Comment> getAll() {
-        TypedQuery<Comment> query = em.createQuery("select c from comments c", Comment.class);
+    public List<Comment> getAllByBookId(long bookId) {
+        TypedQuery<Comment> query = em.createQuery("select c from comments c where c.id = (select comment_id from books b where b.id =:bookId)", Comment.class);
         return query.getResultList();
     }
 
     @Override
-    public Comment insertComment(Comment comment) {
+    public Comment insertComment(Comment comment, long bookId) {
         if (comment.getId() == 0) {
             em.persist(comment);
             return comment;
@@ -29,14 +29,9 @@ public class CommentsRepository implements CommentDao {
     }
 
     @Override
-    public void deleteCommentById(Long id) {
-        Query query = em.createQuery("delete from comments c where c.id = :id");
-        query.setParameter("id", id);
+    public void deleteCommentByBookId(Long bookId) {
+        Query query = em.createQuery("delete from comments c where c.id = (select comment_id from books b where b.id =:bookId)");
+        query.setParameter("bookId", bookId);
         query.executeUpdate();
-    }
-
-    @Override
-    public int deleteAll() {
-        return 0;
     }
 }
