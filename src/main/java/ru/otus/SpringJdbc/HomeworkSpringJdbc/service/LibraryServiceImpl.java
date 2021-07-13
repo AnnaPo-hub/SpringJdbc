@@ -1,5 +1,6 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
@@ -9,12 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class LibraryServiceImpl implements LibraryService {
     LibraryDao libraryDao;
-
-    public LibraryServiceImpl(LibraryDao libraryDao) {
-        this.libraryDao = libraryDao;
-    }
 
     @Transactional
     @Override
@@ -57,4 +55,6 @@ public class LibraryServiceImpl implements LibraryService {
     public void deleteBookById(Long id) {
         libraryDao.deleteBookById(id);
     }
+
+
 }

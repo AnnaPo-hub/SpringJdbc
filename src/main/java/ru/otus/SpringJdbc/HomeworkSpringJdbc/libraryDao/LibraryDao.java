@@ -9,19 +9,17 @@ import java.util.Optional;
 public interface LibraryDao {
     List<Book> getAll();
 
-   List<Book>  getBookByName(String bookName);
+    List<Book> getBookByName(String bookName);
 
-  List<Book>  getBookByAuthor(String authorName);
+    List<Book> getBookByAuthor(String authorName);
 
-    List <Book>  getBookByGenre(String genre);
+    List<Book> getBookByGenre(String genre);
 
     Optional<Book> getBookById(Long id);
 
     Book insertBook(Book book);
 
     void deleteBookById(Long id);
-
-
 
 
 }

@@ -22,3 +22,13 @@ genre_id bigint references genres(id),
 primary key (id)
 );
 
+create table comments(
+id bigserial,
+date timestamp,
+comment varchar(255),
+author varchar(255),
+book_id bigint references book(id)
+);
+
+)
+

@@ -35,7 +35,7 @@ class LibraryServiceImplTest {
 
     @BeforeAll
     void setUp() {
-        comments.add(new Comment((long)1, LocalDate.now(), "Good book"));
+        comments.add(new Comment( (long)10, LocalDate.now(), "Good book", "Alicia", existingBook1));
         library.add(existingBook1);
         library.add(existingBook2);
     }

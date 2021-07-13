@@ -11,13 +11,22 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Table(name = "comments")
+@Table(name = "comment")
 public class Comment {
     @Id
     @GeneratedValue
     Long id;
-    @Column (name = "date")
+
+    @Column(name = "date")
     LocalDate date;
+
     @Column(name = "comment")
     String comment;
+
+    @Column(name = "author")
+    String author;
+
+    @ManyToOne(targetEntity = Book.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_book_id"), nullable = false)
+    private Book book;
 }

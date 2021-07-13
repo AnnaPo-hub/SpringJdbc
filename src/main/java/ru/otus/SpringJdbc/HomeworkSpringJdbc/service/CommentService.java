@@ -1,13 +1,12 @@
-package ru.otus.SpringJdbc.HomeworkSpringJdbc.CommentDao;
+package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 
-public interface CommentDao {
-    Comment insertComment(Comment comment);
+public interface CommentService {
 
     Comment getCommentByBookId(long bookId);
 
-
     void deleteCommentByBookId(Long id);
 
+    void insertComment(Comment comment);
 }
