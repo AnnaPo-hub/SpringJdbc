@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 @Repository
 @AllArgsConstructor
-public class CommentsRepository implements CommentDao {
+public class CommentsJpa implements CommentDao {
     @PersistenceContext
     private EntityManager em;
 
@@ -30,17 +30,16 @@ public class CommentsRepository implements CommentDao {
         return comment;
     }
 
-    @Override//ok
+    @Override
     public Comment getCommentByBookId(long bookId) {
         TypedQuery<Comment> query = em.createQuery("select c from Comment c where c.id = (select b.comment from Book b where b.id =:bookId)", Comment.class);
         query.setParameter("bookId", bookId);
         return query.getSingleResult();
     }
 
-    @Override //работает
+    @Override
     public void deleteCommentByBookId(Long bookId) {
         Query query = em.createQuery("update Book b set b.comment = null where b.id= :bookId");
-        //"delete b.comment from Book b where b.id = (select b.comment from Book b where b.id =:bookId)");
         query.setParameter("bookId", bookId);
         query.executeUpdate();
     }
