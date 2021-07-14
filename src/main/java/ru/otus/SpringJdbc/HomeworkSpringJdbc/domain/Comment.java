@@ -20,8 +20,8 @@ public class Comment {
     @Column(name = "date")
     LocalDate date;
 
-    @Column(name = "comment")
-    String comment;
+    @Column(name = "comment_text")
+    String comment_text;
 
     @Column(name = "author")
     String author;

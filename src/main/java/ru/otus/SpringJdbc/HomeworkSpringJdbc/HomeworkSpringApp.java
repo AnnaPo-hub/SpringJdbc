@@ -5,9 +5,6 @@ import org.h2.tools.Console;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.AuthorService;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.CommentService;
@@ -15,7 +12,6 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.GenreService;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.LibraryService;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 @SpringBootApplication
 public class HomeworkSpringApp {
@@ -28,12 +24,12 @@ public class HomeworkSpringApp {
         final GenreService genreService = context.getBean(GenreService.class);
         LibraryService service = context.getBean(LibraryService.class);
 
-        authorService.insert(new Author((long)1, "Pushkin"));
-        genreService.insert(new Genre((long)1, "Poetry"));
+       // authorService.insert(new Author((long) 1, "Pushkin"));
+       // genreService.insert(new Genre((long) 1, "Poetry"));
 
 //
 //      Genre testGenre = new Genre((long) 1, "Non-fiction");
-   Genre testGenre2 = new Genre((long) 1, "Poetry");
+        Genre testGenre2 = new Genre((long) 1, "Poetry");
 //     Author testAuthor = new Author((long) 1, "William Nilson");
 //        Author testAuthor2 = new Author((long) 2, "Claus Annik");
 //        List<Comment> commentList = new ArrayList<>();
@@ -41,9 +37,9 @@ public class HomeworkSpringApp {
 ////
 
 //        System.out.println("---------");
-     service.createBook(new Book((long) 1, "Nature", new Author((long) 1, "Pushkin"), testGenre2, null));
+      //  service.createBook(new Book((long) 1, "Nature", new Author((long) 1, "Pushkin"), testGenre2, null));
 
-     //  service.createBook(new Book((long) 2, "Woobe", testAuthor2, testGenre, null));
+        //  service.createBook(new Book((long) 2, "Woobe", testAuthor2, testGenre, null));
 //        System.out.println("---------");
 //        final Optional<Book> bookById = service.findBookById((long) 1);
 //        System.out.println("найти книгу по айди " + bookById);
@@ -57,11 +53,11 @@ public class HomeworkSpringApp {
 //        System.out.println(" коммент по бук ай ди" + commentByBookId);
 //
 //       commentsService.deleteCommentByBookId((long)1);
-      commentsService.insertComment(new Comment((long) 1, LocalDate.now(), "Uf, Good Book", "Petr",  new Book((long) 1, "Nature", new Author((long) 1, "Pushkin"), testGenre2, null)));
+       // commentsService.insertComment(new Comment((long) 1, LocalDate.now(), "Uf, Good Book", "Petr", new Book((long) 1, "Nature", new Author((long) 1, "Pushkin"), testGenre2, null)));
 
         // final List<Book> bookById3 = service.findBookByName("Woobe");
         //System.out.println("найти книгу по названию " + bookById3);
-     //   System.out.println(service.showAllBooks());
+        //   System.out.println(service.showAllBooks());
 
 //        System.out.println("---------");
 //        System.out.println(bookById);

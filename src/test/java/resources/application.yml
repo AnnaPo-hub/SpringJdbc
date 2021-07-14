@@ -1,12 +1,22 @@
 spring:
   datasource:
     url: jdbc:h2:mem:testdb
-    initialization-mode: never
+    initialization-mode: always
+
+  shell:
+    interactive:
+      enabled: false
 
   jpa:
-    generate-ddl: true
+    generate-ddl: false
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
+
+  h2:
+    console:
+      path: /h2-console
+      settings:
+        web-allow-others: true
 
   sql:
     init:

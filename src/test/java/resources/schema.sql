@@ -1,6 +1,7 @@
-DROP TABLE IF EXISTS BOOKS;
-DROP TABLE IF EXISTS AUTHORS;
-DROP TABLE IF EXISTS GENRES;
+DROP TABLE IF EXISTS AUTHORS cascade ;
+DROP TABLE IF EXISTS GENRES cascade ;
+DROP TABLE IF EXISTS BOOKS cascade ;
+DROP TABLE IF EXISTS COMMENTS cascade ;
 
 create table authors(
 id bigserial,
@@ -25,10 +26,9 @@ primary key (id)
 create table comments(
 id bigserial,
 date timestamp,
-comment varchar(255),
+comment_text varchar(255),
 author varchar(255),
-book_id bigint references book(id)
+book_id bigint references books(id)
 );
 
-)
 
