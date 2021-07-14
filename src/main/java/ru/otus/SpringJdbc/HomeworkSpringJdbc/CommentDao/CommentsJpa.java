@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 @AllArgsConstructor
@@ -31,10 +32,10 @@ public class CommentsJpa implements CommentDao {
     }
 
     @Override
-    public Comment getCommentByBookId(long bookId) {
-        TypedQuery<Comment> query = em.createQuery("select c from Comment c where c.id = (select b.comment from Book b where b.id =:bookId)", Comment.class);
+    public List<Comment> getCommentByBookId(long bookId) {
+        TypedQuery<Comment> query = em.createQuery("select c.comment_text from Comment c where  book_id =:bookId", Comment.class);
         query.setParameter("bookId", bookId);
-        return query.getSingleResult();
+        return query.getResultList();
     }
 
     @Override
