@@ -46,6 +46,7 @@ public class CommentsJpa implements CommentDao {
         for (Comment commentItem : comment) {
             if (commentItem.getId() != 0) {
                 em.remove(commentItem);
+
             }
         }
     }

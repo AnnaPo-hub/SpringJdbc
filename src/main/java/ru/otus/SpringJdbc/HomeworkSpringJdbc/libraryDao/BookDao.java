@@ -6,7 +6,7 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import java.util.List;
 import java.util.Optional;
 
-public interface LibraryDao {
+public interface BookDao {
     List<Book> getAll();
 
     List<Book> getBookByName(String bookName);

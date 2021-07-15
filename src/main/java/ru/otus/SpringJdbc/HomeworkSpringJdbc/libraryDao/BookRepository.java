@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class LibraryRepository implements LibraryDao {
+public class BookRepository implements BookDao {
     @PersistenceContext
     private EntityManager em;
 
-    public LibraryRepository(EntityManager em) {
+    public BookRepository(EntityManager em) {
         this.em = em;
     }
 

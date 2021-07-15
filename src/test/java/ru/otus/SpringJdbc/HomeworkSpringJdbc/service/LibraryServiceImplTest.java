@@ -13,7 +13,7 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.genreDao.GenreDaoJpa;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao.LibraryRepository;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao.BookRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,13 +22,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @DataJpaTest
-@Import({LibraryRepository.class, CommentsJpa.class, GenreDaoJpa.class, AuthorDaoJpa.class})
+@Import({BookRepository.class, CommentsJpa.class, GenreDaoJpa.class, AuthorDaoJpa.class})
 class LibraryServiceImplTest {
     @Autowired
     private TestEntityManager em;
 
     @Autowired
-    LibraryRepository libraryRepository;
+    BookRepository libraryRepository;
 
     @Test
     void shouldCreateBook() {

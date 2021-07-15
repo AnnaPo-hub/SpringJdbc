@@ -1,15 +1,15 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.authorDao;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.CommentDao.CommentsJpa;
+import org.springframework.test.annotation.DirtiesContext;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.genreDao.GenreDaoJpa;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao.LibraryRepository;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao.BookRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,50 +17,62 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
-@Import({LibraryRepository.class, CommentsJpa.class, GenreDaoJpa.class, AuthorDaoJpa.class})
+@Import({BookRepository.class, AuthorDaoJpa.class})
 class AuthorDaoJpaTest {
     @Autowired
     private AuthorDaoJpa authorDaoJpa;
 
     @Autowired
-    private LibraryRepository libraryRepository;
+    private BookRepository bookRepository;
 
     @Autowired
     private TestEntityManager em;
 
-    Author testAuthor = new Author((long) 3, "Lermontov");
+    private static Author testAuthor;
 
+    @BeforeEach
+    void setUp() {
+        testAuthor = new Author((long) 3, "Lermontov");
+        authorDaoJpa.insert(testAuthor);
+    }
+
+    @DirtiesContext
     @Test
-    void insert() {
+    public void insert() {
         authorDaoJpa.insert(testAuthor);
         final List<Author> allAuthors = authorDaoJpa.getAll();
         Assertions.assertTrue(allAuthors.contains(testAuthor), "Внесенный автор не содержится в списке всех авторов");
     }
 
+    @DirtiesContext
     @Test
-    void getAll() {
+    public void getAll() {
+        authorDaoJpa.insert(testAuthor);
         final List<Author> allAuthors = authorDaoJpa.getAll();
-        assertEquals(2, allAuthors.size(), "Общее количество авторов не соответствует ожидаемому");
+        assertEquals(3, allAuthors.size(), "Общее количество авторов не соответствует ожидаемому");
     }
 
+    @DirtiesContext
     @Test
-    void getByName() {
+    public void getByName() {
         authorDaoJpa.insert(testAuthor);
         final List<Author> authorbyName = authorDaoJpa.getByName(testAuthor.getName());
         Assertions.assertTrue(authorbyName.contains(testAuthor), "Не получилось найти автора по имени");
     }
 
+    @DirtiesContext
     @Test
-    void getById() {
+    public void getById() {
         authorDaoJpa.insert(testAuthor);
         final Optional<Author> byId = authorDaoJpa.getById(testAuthor.getId());
         Assertions.assertTrue(byId.isPresent(), "Не получилось найти автора по id");
     }
 
+    @DirtiesContext
     @Test
-    void deleteById() {
+    public void deleteById() {
         authorDaoJpa.insert(testAuthor);
         authorDaoJpa.deleteById(testAuthor.getId());
-        Assertions.assertNull(em.find(Author.class, (long) 3), "Элемент с указанным id не удален из БД");
+        Assertions.assertNull(em.find(Author.class, testAuthor.getId()), "Элемент с указанным id не удален из БД");
     }
 }

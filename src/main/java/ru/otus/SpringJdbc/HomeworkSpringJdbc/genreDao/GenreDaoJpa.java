@@ -1,12 +1,12 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.genreDao;
 
 import lombok.AllArgsConstructor;
+import lombok.val;
 import org.springframework.stereotype.Repository;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
@@ -47,8 +47,12 @@ public class GenreDaoJpa implements GenreDao {
 
     @Override
     public void deleteById(Long id) {
-        Query query = em.createQuery("delete from Genre g where g.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+        val genre = getById(id);
+        if (genre.isPresent()) {
+            em.remove(genre.get());
+        }
+//        Query query = em.createQuery("delete from Genre g where g.id = :id");
+//        query.setParameter("id", id);
+//        query.executeUpdate();
     }
 }
