@@ -20,6 +20,4 @@ public interface BookDao {
     Book insertBook(Book book);
 
     void deleteBookById(Long id);
-
-
 }

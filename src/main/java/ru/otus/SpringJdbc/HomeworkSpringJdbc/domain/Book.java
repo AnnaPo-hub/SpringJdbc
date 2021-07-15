@@ -30,5 +30,4 @@ public class Book {
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     List<Comment> comment;
-
 }

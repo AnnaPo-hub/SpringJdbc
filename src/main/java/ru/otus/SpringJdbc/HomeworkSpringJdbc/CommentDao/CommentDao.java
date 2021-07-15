@@ -9,7 +9,5 @@ public interface CommentDao {
 
     List<Comment> getCommentByBookId(long bookId);
 
-
     void deleteCommentByBookId(Long id);
-
 }

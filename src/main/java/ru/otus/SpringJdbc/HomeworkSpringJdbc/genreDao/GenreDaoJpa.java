@@ -51,8 +51,5 @@ public class GenreDaoJpa implements GenreDao {
         if (genre.isPresent()) {
             em.remove(genre.get());
         }
-//        Query query = em.createQuery("delete from Genre g where g.id = :id");
-//        query.setParameter("id", id);
-//        query.executeUpdate();
     }
 }

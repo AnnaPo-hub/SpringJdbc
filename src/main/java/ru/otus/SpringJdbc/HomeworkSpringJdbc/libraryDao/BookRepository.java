@@ -66,12 +66,9 @@ public class BookRepository implements BookDao {
     @Override
     public void deleteBookById(Long id) {
         val book = getBookById(id);
-        if(book.isPresent()){
+        if (book.isPresent()) {
             em.remove(book.get());
         }
-//        Query query = em.createQuery("delete from Book b where b.id = :id");
-//        query.setParameter("id", id);
-//        query.executeUpdate();
     }
 }
 
