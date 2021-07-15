@@ -1,13 +1,13 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.authorDao;
 
 import lombok.AllArgsConstructor;
+import lombok.val;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
@@ -49,8 +49,9 @@ public class AuthorDaoJpa implements AuthorDao {
 
     @Override
     public void deleteById(Long id) {
-        Query query = em.createQuery("delete from Author a where a.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+        val author = getById(id);
+        if (author.isPresent()) {
+            em.remove(author.get());
+        }
     }
 }
