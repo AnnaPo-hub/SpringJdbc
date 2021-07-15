@@ -1,12 +1,12 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao;
 
 
+import lombok.val;
 import org.springframework.stereotype.Repository;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
@@ -65,9 +65,13 @@ public class LibraryRepository implements LibraryDao {
 
     @Override
     public void deleteBookById(Long id) {
-        Query query = em.createQuery("delete from Book b where b.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+        val book = getBookById(id);
+        if(book.isPresent()){
+            em.remove(book.get());
+        }
+//        Query query = em.createQuery("delete from Book b where b.id = :id");
+//        query.setParameter("id", id);
+//        query.executeUpdate();
     }
 }
 

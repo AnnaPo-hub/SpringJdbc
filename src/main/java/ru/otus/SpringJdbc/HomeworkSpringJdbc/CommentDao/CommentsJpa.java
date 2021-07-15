@@ -2,11 +2,11 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc.CommentDao;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,15 +33,20 @@ public class CommentsJpa implements CommentDao {
 
     @Override
     public List<Comment> getCommentByBookId(long bookId) {
-        TypedQuery<Comment> query = em.createQuery("select c.comment_text from Comment c where  book_id =:bookId", Comment.class);
+        TypedQuery<Comment> query = em.createQuery("select c from Comment c where  book_id =:bookId", Comment.class);
         query.setParameter("bookId", bookId);
         return query.getResultList();
     }
 
     @Override
     public void deleteCommentByBookId(Long bookId) {
-        Query query = em.createQuery("update Book b set b.comment = null where b.id= :bookId");
+        TypedQuery<Book> query = em.createQuery("select b from Book b where  b.id =:bookId", Book.class);
         query.setParameter("bookId", bookId);
-        query.executeUpdate();
+        final List<Comment> comment = query.getSingleResult().getComment();
+        for (Comment commentItem : comment) {
+            if (commentItem.getId() != 0) {
+                em.remove(commentItem);
+            }
+        }
     }
 }
