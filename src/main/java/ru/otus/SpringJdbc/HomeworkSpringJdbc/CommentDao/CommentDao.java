@@ -8,8 +8,7 @@ import java.util.List;
 
 @Repository
 public interface CommentDao extends JpaRepository<Comment, Long> {
-     Comment insertCommentByBookId(Comment comment);
-
+   // Comment save(Comment comment);
     List<Comment> getByBookId(long bookId);
 
     void deleteByBookId(Long id);

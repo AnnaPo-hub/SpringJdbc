@@ -14,8 +14,7 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao.BookDao;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 class BookDaoTest {
@@ -32,38 +31,38 @@ class BookDaoTest {
         Book testbook = new Book((long) 3, "BookforInsertTest", author, genre, null);
         Book savedBook = bookDao.save(testbook);
         final List<String> collect = bookDao.findAll().stream().map(Book::getName).collect(Collectors.toList());
-        Assertions.assertTrue(collect.contains(savedBook.getName()));
+        assertTrue(collect.contains(savedBook.getName()), "Не удалось внести кнингу в БД");
     }
 
     @Test
     void shouldShowAllBooks() {
-        Assertions.assertEquals(2, bookDao.findAll().size());
+        Assertions.assertEquals(2, bookDao.findAll().size(),
+                "Фактическое количество книг в БД не соответствует ожидаемому");
     }
 
     @Test
     void shouldFindBookByName() {
         final List<Book> the_lady_unknown = bookDao.getByName("The nature");
-        Assertions.assertFalse(the_lady_unknown.isEmpty());
+        Assertions.assertFalse(the_lady_unknown.isEmpty(), "Не удалось найти книгу по указанному названию");
     }
 
     @Test
     void shouldFindBookByAuthor() {
         final List<Book> blok = bookDao.getByAuthorName("Blok");
-        Assertions.assertFalse(blok.isEmpty());
+        Assertions.assertFalse(blok.isEmpty(), "Не удалось найти книгу по указанному автору");
     }
 
     @Test
     void shouldFindBookByGenre() {
         final List<Book> blok = bookDao.getByGenreName("Poetry");
-        Assertions.assertFalse(blok.isEmpty());
+        Assertions.assertFalse(blok.isEmpty(), "Не удалось найти книгу по указанному жанру");
     }
 
     @Test
     void shouldFindBookById() {
         val actualBook = bookDao.getById((long) 1);
         val expectedBook = em.find(Book.class, (long) 1);
-        assertEquals(expectedBook, actualBook);
-
+        assertEquals(expectedBook, actualBook, "Не удалось найти книгу по указанному id");
     }
 
     @Test
@@ -73,6 +72,6 @@ class BookDaoTest {
         Book testbook = new Book((long) 6, "BookforInsertTest", author, genre, null);
         final Book savedBook = bookDao.save(testbook);
         bookDao.deleteById(savedBook.getId());
-        assertNull(em.find(Book.class, savedBook.getId()));
+        assertNull(em.find(Book.class, savedBook.getId()), "Не удалось удалить книгу по указанному id");
     }
 }
