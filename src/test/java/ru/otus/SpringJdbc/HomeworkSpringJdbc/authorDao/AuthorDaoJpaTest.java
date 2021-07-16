@@ -39,7 +39,6 @@ class AuthorDaoJpaTest {
     @DirtiesContext
     @Test
     public void insert() {
-        authorDaoJpa.insert(testAuthor);
         final List<Author> allAuthors = authorDaoJpa.getAll();
         Assertions.assertTrue(allAuthors.contains(testAuthor), "Внесенный автор не содержится в списке всех авторов");
     }
@@ -47,7 +46,6 @@ class AuthorDaoJpaTest {
     @DirtiesContext
     @Test
     public void getAll() {
-        authorDaoJpa.insert(testAuthor);
         final List<Author> allAuthors = authorDaoJpa.getAll();
         assertEquals(3, allAuthors.size(), "Общее количество авторов не соответствует ожидаемому");
     }
@@ -55,7 +53,6 @@ class AuthorDaoJpaTest {
     @DirtiesContext
     @Test
     public void getByName() {
-        authorDaoJpa.insert(testAuthor);
         final List<Author> authorbyName = authorDaoJpa.getByName(testAuthor.getName());
         Assertions.assertTrue(authorbyName.contains(testAuthor), "Не получилось найти автора по имени");
     }
@@ -63,7 +60,6 @@ class AuthorDaoJpaTest {
     @DirtiesContext
     @Test
     public void getById() {
-        authorDaoJpa.insert(testAuthor);
         final Optional<Author> byId = authorDaoJpa.getById(testAuthor.getId());
         Assertions.assertTrue(byId.isPresent(), "Не получилось найти автора по id");
     }
@@ -71,7 +67,6 @@ class AuthorDaoJpaTest {
     @DirtiesContext
     @Test
     public void deleteById() {
-        authorDaoJpa.insert(testAuthor);
         authorDaoJpa.deleteById(testAuthor.getId());
         Assertions.assertNull(em.find(Author.class, testAuthor.getId()), "Элемент с указанным id не удален из БД");
     }

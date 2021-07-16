@@ -77,8 +77,8 @@ class LibraryServiceImplTest {
         Author author = new Author((long) 1, "Blok");
         Genre genre = new Genre((long) 1, "Poetry");
         Book testbook = new Book((long) 4, "BookforInsertTest", author, genre, null);
-        libraryRepository.insertBook(testbook);
-        libraryRepository.deleteBookById((long) 4);
-        assertNull(em.find(Book.class, (long) 4));
+        final Book savedBook = libraryRepository.insertBook(testbook);
+        libraryRepository.deleteBookById(savedBook.getId());
+        assertNull(em.find(Book.class, savedBook.getId()));
     }
 }
