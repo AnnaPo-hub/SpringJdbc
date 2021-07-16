@@ -16,18 +16,18 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     @Override
     public List<Comment> getCommentByBookId(long bookId) {
-        return commentDao.getCommentByBookId(bookId);
+        return commentDao.getByBookId(bookId);
     }
 
     @Transactional
     @Override
     public void deleteCommentByBookId(Long id) {
-        commentDao.deleteCommentByBookId(id);
+        commentDao.deleteByBookId(id);
     }
 
     @Transactional
     @Override
     public void insertComment(Comment comment) {
-        commentDao.insertComment(comment);
+        commentDao.save(comment);
     }
 }

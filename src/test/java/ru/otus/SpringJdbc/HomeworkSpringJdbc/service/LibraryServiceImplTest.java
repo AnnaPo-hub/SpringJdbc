@@ -6,69 +6,63 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.context.annotation.Import;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.CommentDao.CommentsJpa;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.authorDao.AuthorDaoJpa;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.genreDao.GenreDaoJpa;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao.BookRepository;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao.BookDao;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @DataJpaTest
-@Import({BookRepository.class, CommentsJpa.class, GenreDaoJpa.class, AuthorDaoJpa.class})
 class LibraryServiceImplTest {
     @Autowired
     private TestEntityManager em;
 
     @Autowired
-    BookRepository libraryRepository;
+    BookDao bookDao;
 
     @Test
     void shouldCreateBook() {
         Author author = new Author((long) 1, "Blok");
         Genre genre = new Genre((long) 1, "Poetry");
         Book testbook = new Book((long) 3, "BookforInsertTest", author, genre, null);
-        Book savedBook = libraryRepository.insertBook(testbook);
-        final List<String> collect = libraryRepository.getAll().stream().map(Book::getName).collect(Collectors.toList());
+        Book savedBook = bookDao.save(testbook);
+        final List<String> collect = bookDao.findAll().stream().map(Book::getName).collect(Collectors.toList());
         Assertions.assertTrue(collect.contains(savedBook.getName()));
     }
 
     @Test
     void shouldShowAllBooks() {
-        final List<Book> all = libraryRepository.getAll();
-        Assertions.assertEquals(2, libraryRepository.getAll().size());
+        Assertions.assertEquals(2, bookDao.findAll().size());
     }
 
     @Test
     void shouldFindBookByName() {
-        final List<Book> the_lady_unknown = libraryRepository.getBookByName("The nature");
+        final List<Book> the_lady_unknown = bookDao.getByName("The nature");
         Assertions.assertFalse(the_lady_unknown.isEmpty());
     }
 
     @Test
     void shouldFindBookByAuthor() {
-        final List<Book> blok = libraryRepository.getBookByAuthor("Blok");
+        final List<Book> blok = bookDao.getByAuthorName("Blok");
         Assertions.assertFalse(blok.isEmpty());
     }
 
     @Test
     void shouldFindBookByGenre() {
-        final List<Book> blok = libraryRepository.getBookByGenre("Poetry");
+        final List<Book> blok = bookDao.getByGenreName("Poetry");
         Assertions.assertFalse(blok.isEmpty());
     }
 
     @Test
     void shouldFindBookById() {
-        val actualBook = libraryRepository.getBookById((long) 1);
+        val actualBook = bookDao.getById((long) 1);
         val expectedBook = em.find(Book.class, (long) 1);
-        assertThat(actualBook).isPresent().get().usingRecursiveComparison().isEqualTo(expectedBook);
+        assertEquals(expectedBook, actualBook);
 
     }
 
@@ -76,9 +70,9 @@ class LibraryServiceImplTest {
     void shouldDeleteBookById() {
         Author author = new Author((long) 1, "Blok");
         Genre genre = new Genre((long) 1, "Poetry");
-        Book testbook = new Book((long) 4, "BookforInsertTest", author, genre, null);
-        libraryRepository.insertBook(testbook);
-        libraryRepository.deleteBookById((long) 4);
-        assertNull(em.find(Book.class, (long) 4));
+        Book testbook = new Book((long) 6, "BookforInsertTest", author, genre, null);
+        final Book savedBook = bookDao.save(testbook);
+        bookDao.deleteById(savedBook.getId());
+        assertNull(em.find(Book.class, savedBook.getId()));
     }
 }

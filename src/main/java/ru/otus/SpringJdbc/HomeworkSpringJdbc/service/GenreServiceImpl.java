@@ -17,13 +17,13 @@ public class GenreServiceImpl implements GenreService {
     @Transactional
     @Override
     public Genre insert(Genre genre) {
-        return genreDao.insert(genre);
+        return genreDao.save(genre);
     }
 
     @Transactional
     @Override
     public List<Genre> getAll() {
-        return genreDao.getAll();
+        return genreDao.findAll();
     }
 
     @Transactional
@@ -35,7 +35,7 @@ public class GenreServiceImpl implements GenreService {
     @Transactional
     @Override
     public Optional<Genre> getById(Long id) {
-        return genreDao.getById(id);
+        return genreDao.findById(id);
     }
 
     @Override

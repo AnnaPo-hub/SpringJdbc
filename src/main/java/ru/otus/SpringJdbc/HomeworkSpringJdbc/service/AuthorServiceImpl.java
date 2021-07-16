@@ -17,13 +17,13 @@ public class AuthorServiceImpl implements AuthorService {
     @Transactional
     @Override
     public Author insert(Author author) {
-        return authorDao.insert(author);
+        return authorDao.save(author);
     }
 
     @Transactional
     @Override
     public List<Author> getAll() {
-        return authorDao.getAll();
+        return authorDao.findAll();
     }
 
     @Transactional
@@ -35,13 +35,12 @@ public class AuthorServiceImpl implements AuthorService {
     @Transactional
     @Override
     public Optional<Author> getById(Long id) {
-        return authorDao.getById(id);
+        return authorDao.findById(id);
     }
 
     @Transactional
     @Override
     public void deleteById(Long id) {
         authorDao.deleteById(id);
-
     }
 }
