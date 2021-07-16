@@ -11,7 +11,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
 
 @DataJpaTest
-class GenreDaoJpaTest {
+class GenreDaoTest {
 
     Genre testGenre = new Genre((long) 2, "Non-fiction");
     @Autowired

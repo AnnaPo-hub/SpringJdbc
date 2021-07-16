@@ -15,8 +15,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
-//@Import({BookRepository.class, AuthorDao.class})
-class AuthorDaoJpaTest {
+class AuthorDaoTest {
     @Autowired
     private AuthorDao authorDao;
 

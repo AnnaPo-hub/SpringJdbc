@@ -13,8 +13,8 @@ public interface BookDao extends JpaRepository<Book, Long> {
 //
     List<Book> getByName(String bookName);
 
-  //  @Query("select b from Book b where b.author=(select a.id from Author a where a.name = :name")
-    List<Book> getByAuthorName( String name);
+    //  @Query("select b from Book b where b.author=(select a.id from Author a where a.name = :name")
+    List<Book> getByAuthorName(String name);
 
     List<Book> getByGenreName(String genre);
 //

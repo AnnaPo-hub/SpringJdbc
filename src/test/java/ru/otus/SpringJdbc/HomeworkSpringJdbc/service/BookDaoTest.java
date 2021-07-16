@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @DataJpaTest
-class LibraryServiceImplTest {
+class BookDaoTest {
     @Autowired
     private TestEntityManager em;
 

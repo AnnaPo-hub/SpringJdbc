@@ -24,8 +24,8 @@ public class HomeworkSpringApp {
         final GenreService genreService = context.getBean(GenreService.class);
         LibraryService service = context.getBean(LibraryService.class);
 
-       // authorService.insert(new Author((long) 1, "Pushkin"));
-       // genreService.insert(new Genre((long) 1, "Poetry"));
+        // authorService.insert(new Author((long) 1, "Pushkin"));
+        // genreService.insert(new Genre((long) 1, "Poetry"));
 
 //
 //      Genre testGenre = new Genre((long) 1, "Non-fiction");
@@ -37,7 +37,7 @@ public class HomeworkSpringApp {
 ////
 
 //        System.out.println("---------");
-      //  service.createBook(new Book((long) 1, "Nature", new Author((long) 1, "Pushkin"), testGenre2, null));
+        //  service.createBook(new Book((long) 1, "Nature", new Author((long) 1, "Pushkin"), testGenre2, null));
 
         //  service.createBook(new Book((long) 2, "Woobe", testAuthor2, testGenre, null));
 //        System.out.println("---------");
@@ -53,7 +53,7 @@ public class HomeworkSpringApp {
 //        System.out.println(" коммент по бук ай ди" + commentByBookId);
 //
 //       commentsService.deleteCommentByBookId((long)1);
-       // commentsService.insertComment(new Comment((long) 1, LocalDate.now(), "Uf, Good Book", "Petr", new Book((long) 1, "Nature", new Author((long) 1, "Pushkin"), testGenre2, null)));
+        // commentsService.insertComment(new Comment((long) 1, LocalDate.now(), "Uf, Good Book", "Petr", new Book((long) 1, "Nature", new Author((long) 1, "Pushkin"), testGenre2, null)));
 
         // final List<Book> bookById3 = service.findBookByName("Woobe");
         //System.out.println("найти книгу по названию " + bookById3);
