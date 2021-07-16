@@ -3,8 +3,8 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.dao.GenreDao;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.genreDao.GenreDao;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,6 +41,5 @@ public class GenreServiceImpl implements GenreService {
     @Override
     public void deleteById(Long id) {
         genreDao.deleteById(id);
-
     }
 }

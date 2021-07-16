@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.DirtiesContext;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.dao.CommentDao;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;

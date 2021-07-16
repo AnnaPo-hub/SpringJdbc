@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao.BookDao;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.dao.BookDao;
 
 import java.util.List;
 import java.util.Optional;

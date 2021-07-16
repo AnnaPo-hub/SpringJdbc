@@ -1,4 +1,4 @@
-package ru.otus.SpringJdbc.HomeworkSpringJdbc.authorDao;
+package ru.otus.SpringJdbc.HomeworkSpringJdbc.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

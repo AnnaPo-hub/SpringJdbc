@@ -9,7 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao.BookDao;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.dao.BookDao;
 
 import java.util.List;
 import java.util.stream.Collectors;

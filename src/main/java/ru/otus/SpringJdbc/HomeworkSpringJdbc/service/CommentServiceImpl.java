@@ -3,7 +3,7 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.CommentDao.CommentDao;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.dao.CommentDao;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 
 import java.util.List;
@@ -12,7 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 public class CommentServiceImpl implements CommentService {
     CommentDao commentDao;
-   // CommentDao commentDaoCustom;
 
     @Transactional
     @Override
