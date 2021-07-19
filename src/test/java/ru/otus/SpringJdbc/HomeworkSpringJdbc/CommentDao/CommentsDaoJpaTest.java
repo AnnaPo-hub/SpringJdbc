@@ -31,11 +31,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @Import({BookDaoJpa.class, CommentsDaoJpa.class, GenreDaoJpa.class, AuthorDaoJpa.class, CommentServiceImpl.class, BookServiceImpl.class})
 class CommentsDaoJpaTest {
-    Author author = new Author((long) 1, "Blok", null);
-    Genre genre = new Genre((long) 1, "Poetry");
-    Book testbook = new Book((long) 3, "BookforInsertCommentTest", author, genre, null);
-    Comment testComment = new Comment((long) 2, LocalDate.now(), "Must read", "Vasya", testbook);
-
+    private Author author = new Author((long) 1, "Blok", null);
+    private final Genre genre = new Genre((long) 1, "Poetry");
+    private Book testbook = new Book((long) 3, "BookforInsertCommentTest", author, genre, null);
+    private final Comment testComment = new Comment((long) 2, LocalDate.now(), "Must read", "Vasya", testbook);
+    private Comment insertedComment;
 
     @Autowired
     private CommentsDaoJpa commentsDaoJpa;
@@ -52,13 +52,12 @@ class CommentsDaoJpaTest {
     @BeforeEach
     void setUp() {
         libraryRepository.insertBook(testbook);
+        insertedComment = commentsDaoJpa.insertComment(testComment);
     }
 
     @DirtiesContext
     @Test
     public void insertComment() {
-
-        final Comment insertedComment = commentsDaoJpa.insertComment(testComment);
         final Comment comment = em.find(Comment.class, insertedComment.getId());
         Assertions.assertTrue(comment.getComment_text().matches("Must read"));
     }
@@ -66,8 +65,7 @@ class CommentsDaoJpaTest {
     @DirtiesContext
     @Test
     public void getCommentByBookId() {
-        final Comment comment = commentsDaoJpa.insertComment(testComment);
-        em.refresh(comment);
+        em.refresh(insertedComment);
         final List<Comment> commentByBookId = commentService.getCommentByBookId(testbook.getId());
         Assertions.assertTrue(commentByBookId.get(0).getComment_text().matches("Must read"));
     }
@@ -75,13 +73,8 @@ class CommentsDaoJpaTest {
     @DirtiesContext
     @Test
     public void deleteCommentByBookId() {
-        final Comment insertedComment = commentsDaoJpa.insertComment(testComment);
-        final Comment comment = em.find(Comment.class, testComment.getId());
-        assertThat(comment).isNotNull();
-        //em.detach(comment);
-
+        em.refresh(insertedComment);
         commentsDaoJpa.deleteCommentByBookId(testbook.getId());
-
         val deletedComment = em.find(Comment.class, insertedComment.getId());
         assertThat(deletedComment).isNull();
     }
