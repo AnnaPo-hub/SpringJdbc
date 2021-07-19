@@ -15,38 +15,32 @@ import java.util.Optional;
 public class BookServiceImpl implements BookService {
     private final BookDao bookDao;
 
-
     @Transactional
     @Override
     public void createBook(Book book) {
         bookDao.insertBook(book);
     }
 
-    @Transactional
     @Override
     public List<Book> showAllBooks() {
         return bookDao.getAll();
     }
 
-    @Transactional
     @Override
     public List<Book> findBookByName(String bookName) {
         return bookDao.getBookByName(bookName);
     }
 
-    @Transactional
     @Override
     public List<Book> findBookByAuthor(Author author) {
         return author.getBooks();
     }
 
-    @Transactional
     @Override
     public List<Book> findBookByGenre(String genre) {
         return bookDao.getBookByGenre(genre);
     }
 
-    @Transactional
     @Override
     public Optional<Book> findBookById(Long id) {
         return bookDao.getBookById(id);

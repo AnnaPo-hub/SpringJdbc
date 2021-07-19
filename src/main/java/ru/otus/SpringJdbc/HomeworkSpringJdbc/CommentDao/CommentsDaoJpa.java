@@ -38,7 +38,7 @@ public class CommentsDaoJpa implements CommentDao {
         final List<Comment> comment = query.getSingleResult().getComment();
         for (Comment commentItem : comment) {
             if (commentItem.getId() != 0) {
-                em.remove(commentItem);
+                em.detach(commentItem);
 
             }
         }

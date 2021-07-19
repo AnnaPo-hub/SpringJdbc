@@ -78,9 +78,10 @@ class CommentsDaoJpaTest {
         final Comment insertedComment = commentsDaoJpa.insertComment(testComment);
         final Comment comment = em.find(Comment.class, testComment.getId());
         assertThat(comment).isNotNull();
-        em.detach(comment);
+        //em.detach(comment);
 
         commentsDaoJpa.deleteCommentByBookId(testbook.getId());
+
         val deletedComment = em.find(Comment.class, insertedComment.getId());
         assertThat(deletedComment).isNull();
     }

@@ -20,19 +20,16 @@ public class AuthorServiceImpl implements AuthorService {
         return authorDao.insert(author);
     }
 
-    @Transactional
     @Override
     public List<Author> getAll() {
         return authorDao.getAll();
     }
 
-    @Transactional
     @Override
     public List<Author> getByName(String authorName) {
         return authorDao.getByName(authorName);
     }
 
-    @Transactional
     @Override
     public Optional<Author> getById(Long id) {
         return authorDao.getById(id);
