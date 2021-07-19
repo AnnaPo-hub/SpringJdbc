@@ -17,16 +17,19 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.genreDao.GenreDaoJpa;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao.BookRepository;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.BookServiceImpl;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.CommentService;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.CommentServiceImpl;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
+
 @Transactional
 @DataJpaTest
-@Import({BookRepository.class, CommentsJpa.class, GenreDaoJpa.class, AuthorDaoJpa.class})
+@Import({BookRepository.class, CommentsJpa.class, GenreDaoJpa.class, AuthorDaoJpa.class, CommentServiceImpl.class, BookServiceImpl.class})
 class CommentsJpaTest {
     Author author = new Author((long) 1, "Blok");
     Genre genre = new Genre((long) 1, "Poetry");
@@ -42,6 +45,9 @@ class CommentsJpaTest {
 
     @Autowired
     private TestEntityManager em;
+
+    @Autowired
+    private CommentService commentService;
 
     @BeforeEach
     void setUp() {
@@ -60,8 +66,9 @@ class CommentsJpaTest {
     @DirtiesContext
     @Test
     public void getCommentByBookId() {
-        commentsJpa.insertComment(testComment);
-        final List<Comment> commentByBookId = commentsJpa.getCommentByBookId(testbook.getId());
+        final Comment comment = commentsJpa.insertComment(testComment);
+        em.refresh(comment);
+        final List<Comment> commentByBookId = commentService.getCommentByBookId(testbook.getId());
         Assertions.assertTrue(commentByBookId.get(0).getComment_text().matches("Must read"));
     }
 
