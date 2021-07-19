@@ -9,7 +9,7 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.AuthorService;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.CommentService;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.GenreService;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.LibraryService;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.BookService;
 
 import java.sql.SQLException;
 
@@ -22,7 +22,7 @@ public class HomeworkSpringApp {
         final CommentService commentsService = context.getBean(CommentService.class);
         final AuthorService authorService = context.getBean(AuthorService.class);
         final GenreService genreService = context.getBean(GenreService.class);
-        LibraryService service = context.getBean(LibraryService.class);
+        BookService service = context.getBean(BookService.class);
 
        // authorService.insert(new Author((long) 1, "Pushkin"));
        // genreService.insert(new Genre((long) 1, "Poetry"));

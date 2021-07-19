@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @DataJpaTest
 @Import({BookRepository.class, CommentsJpa.class, GenreDaoJpa.class, AuthorDaoJpa.class})
-class LibraryServiceImplTest {
+class BookServiceImplTest {
     @Autowired
     private TestEntityManager em;
 
