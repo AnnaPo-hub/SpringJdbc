@@ -2,6 +2,7 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
+@Getter
 @Table(name = "book")
 public class Book {
     @Id

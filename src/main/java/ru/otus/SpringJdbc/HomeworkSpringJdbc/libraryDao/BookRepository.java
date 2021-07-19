@@ -2,7 +2,7 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao;
 
 
 import lombok.val;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 
 import javax.persistence.EntityManager;
@@ -11,7 +11,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Component
 public class BookRepository implements BookDao {
     @PersistenceContext
     private EntityManager em;

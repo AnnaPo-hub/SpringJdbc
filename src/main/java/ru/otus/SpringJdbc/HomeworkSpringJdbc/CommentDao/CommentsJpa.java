@@ -1,7 +1,7 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.CommentDao;
 
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 
@@ -11,7 +11,7 @@ import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+@Component
 @AllArgsConstructor
 public class CommentsJpa implements CommentDao {
     @PersistenceContext
@@ -29,13 +29,6 @@ public class CommentsJpa implements CommentDao {
             return em.merge(comment);
         }
         return comment;
-    }
-
-    @Override
-    public List<Comment> getCommentByBookId(long bookId) {
-        TypedQuery<Comment> query = em.createQuery("select c from Comment c where  book_id =:bookId", Comment.class);
-        query.setParameter("bookId", bookId);
-        return query.getResultList();
     }
 
     @Override
