@@ -1,4 +1,4 @@
-package ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao;
+package ru.otus.SpringJdbc.HomeworkSpringJdbc.bookDao;
 
 
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
@@ -10,8 +10,6 @@ public interface BookDao {
     List<Book> getAll();
 
     List<Book> getBookByName(String bookName);
-
-    List<Book> getBookByAuthor(String authorName);
 
     List<Book> getBookByGenre(String genre);
 

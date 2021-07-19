@@ -1,4 +1,4 @@
-package ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao;
+package ru.otus.SpringJdbc.HomeworkSpringJdbc.bookDao;
 
 
 import lombok.val;
@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class BookRepository implements BookDao {
+public class BookDaoJpa implements BookDao {
     @PersistenceContext
     private EntityManager em;
 
-    public BookRepository(EntityManager em) {
+    public BookDaoJpa(EntityManager em) {
         this.em = em;
     }
 
@@ -40,13 +40,6 @@ public class BookRepository implements BookDao {
     @Override
     public List<Book> getBookByName(String name) {
         TypedQuery<Book> query = em.createQuery("select b from Book b where b.name=:name", Book.class);
-        query.setParameter("name", name);
-        return query.getResultList();
-    }
-
-    @Override
-    public List<Book> getBookByAuthor(String name) {
-        TypedQuery<Book> query = em.createQuery("select b from Book b where b.author=(select a.id from Author a where a.name = :name)", Book.class);
         query.setParameter("name", name);
         return query.getResultList();
     }

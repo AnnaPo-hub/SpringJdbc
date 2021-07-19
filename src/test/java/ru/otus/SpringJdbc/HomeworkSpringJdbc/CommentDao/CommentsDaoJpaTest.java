@@ -11,12 +11,12 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.authorDao.AuthorDaoJpa;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.bookDao.BookDaoJpa;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.genreDao.GenreDaoJpa;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao.BookRepository;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.BookServiceImpl;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.CommentService;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.CommentServiceImpl;
@@ -29,19 +29,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Transactional
 @DataJpaTest
-@Import({BookRepository.class, CommentsJpa.class, GenreDaoJpa.class, AuthorDaoJpa.class, CommentServiceImpl.class, BookServiceImpl.class})
-class CommentsJpaTest {
-    Author author = new Author((long) 1, "Blok");
+@Import({BookDaoJpa.class, CommentsDaoJpa.class, GenreDaoJpa.class, AuthorDaoJpa.class, CommentServiceImpl.class, BookServiceImpl.class})
+class CommentsDaoJpaTest {
+    Author author = new Author((long) 1, "Blok", null);
     Genre genre = new Genre((long) 1, "Poetry");
     Book testbook = new Book((long) 3, "BookforInsertCommentTest", author, genre, null);
     Comment testComment = new Comment((long) 2, LocalDate.now(), "Must read", "Vasya", testbook);
 
 
     @Autowired
-    private CommentsJpa commentsJpa;
+    private CommentsDaoJpa commentsDaoJpa;
 
     @Autowired
-    private BookRepository libraryRepository;
+    private BookDaoJpa libraryRepository;
 
     @Autowired
     private TestEntityManager em;
@@ -58,7 +58,7 @@ class CommentsJpaTest {
     @Test
     public void insertComment() {
 
-        final Comment insertedComment = commentsJpa.insertComment(testComment);
+        final Comment insertedComment = commentsDaoJpa.insertComment(testComment);
         final Comment comment = em.find(Comment.class, insertedComment.getId());
         Assertions.assertTrue(comment.getComment_text().matches("Must read"));
     }
@@ -66,7 +66,7 @@ class CommentsJpaTest {
     @DirtiesContext
     @Test
     public void getCommentByBookId() {
-        final Comment comment = commentsJpa.insertComment(testComment);
+        final Comment comment = commentsDaoJpa.insertComment(testComment);
         em.refresh(comment);
         final List<Comment> commentByBookId = commentService.getCommentByBookId(testbook.getId());
         Assertions.assertTrue(commentByBookId.get(0).getComment_text().matches("Must read"));
@@ -75,12 +75,12 @@ class CommentsJpaTest {
     @DirtiesContext
     @Test
     public void deleteCommentByBookId() {
-        final Comment insertedComment = commentsJpa.insertComment(testComment);
+        final Comment insertedComment = commentsDaoJpa.insertComment(testComment);
         final Comment comment = em.find(Comment.class, testComment.getId());
         assertThat(comment).isNotNull();
         em.detach(comment);
 
-        commentsJpa.deleteCommentByBookId(testbook.getId());
+        commentsDaoJpa.deleteCommentByBookId(testbook.getId());
         val deletedComment = em.find(Comment.class, insertedComment.getId());
         assertThat(deletedComment).isNull();
     }

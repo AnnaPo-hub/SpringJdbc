@@ -9,7 +9,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao.BookRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,13 +16,10 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
-@Import({BookRepository.class, AuthorDaoJpa.class})
+@Import(AuthorDaoJpa.class)
 class AuthorDaoJpaTest {
     @Autowired
     private AuthorDaoJpa authorDaoJpa;
-
-    @Autowired
-    private BookRepository bookRepository;
 
     @Autowired
     private TestEntityManager em;
@@ -32,7 +28,7 @@ class AuthorDaoJpaTest {
 
     @BeforeEach
     void setUp() {
-        testAuthor = new Author((long) 3, "Lermontov");
+        testAuthor = new Author((long) 3, "Lermontov", null);
         authorDaoJpa.insert(testAuthor);
     }
 

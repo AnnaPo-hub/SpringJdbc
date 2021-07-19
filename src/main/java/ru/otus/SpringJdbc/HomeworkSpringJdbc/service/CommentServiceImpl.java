@@ -14,8 +14,8 @@ import java.util.Optional;
 @Component
 @AllArgsConstructor
 public class CommentServiceImpl implements CommentService {
-    CommentDao commentDao;
-    BookService bookService;
+    private final CommentDao commentDao;
+    private final BookService bookService;
 
     @Transactional
     @Override

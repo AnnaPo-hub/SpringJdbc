@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 @AllArgsConstructor
-public class CommentsJpa implements CommentDao {
+public class CommentsDaoJpa implements CommentDao {
     @PersistenceContext
     private EntityManager em;
 

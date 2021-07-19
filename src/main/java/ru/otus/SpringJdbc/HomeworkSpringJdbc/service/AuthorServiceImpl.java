@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class AuthorServiceImpl implements AuthorService {
-    AuthorDao authorDao;
+    private final AuthorDao authorDao;
 
     @Transactional
     @Override

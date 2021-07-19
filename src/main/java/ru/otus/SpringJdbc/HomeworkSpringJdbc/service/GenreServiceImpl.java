@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class GenreServiceImpl implements GenreService {
-    GenreDao genreDao;
+    private final GenreDao genreDao;
 
     @Transactional
     @Override

@@ -8,16 +8,16 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.CommentDao.CommentsJpa;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.CommentDao.CommentsDaoJpa;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.authorDao.AuthorDaoJpa;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.libraryDao.BookRepository;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.bookDao.BookDaoJpa;
 
 import java.util.List;
 import java.util.Optional;
 
 @DataJpaTest
-@Import({BookRepository.class, CommentsJpa.class, GenreDaoJpa.class, AuthorDaoJpa.class})
+@Import({BookDaoJpa.class, CommentsDaoJpa.class, GenreDaoJpa.class, AuthorDaoJpa.class})
 class GenreDaoJpaTest {
 
     Genre testGenre = new Genre((long) 2, "Non-fiction");
