@@ -6,17 +6,21 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.context.annotation.ComponentScan;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.dao.BookDao;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
+//@Import({BookDao.class,  BookServiceImpl.class})
+@ComponentScan
 class BookDaoTest {
     @Autowired
     private TestEntityManager em;
@@ -27,7 +31,14 @@ class BookDaoTest {
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private AuthorService authorService;
+
+    @Autowired
+    private GenreService genreService;
+
     private Author author = new Author((long) 1, "Blok", null);
+    private Author existingAuthor = new Author((long) 2, "Dostoevskiy", null);
     private Genre genre = new Genre((long) 1, "Poetry");
     private Book testbook = new Book((long) 6, "BookforInsertTest", author, genre, null);
 
@@ -52,8 +63,13 @@ class BookDaoTest {
 
     @Test
     void shouldFindBookByAuthor() {
-        final List<Book> blok = bookService.findBookByAuthor(author);
-        Assertions.assertFalse(blok.isEmpty(), "Не удалось найти книгу по указанному автору");
+        final Genre insertedGenre = genreService.insert(genre);
+        final Author pushkin = authorService.insert(new Author((long) 3, "Pushkin", null));
+        List<Book> books = new ArrayList<>();
+        books.add(bookDao.save(new Book((long) 7, "Captain's Daughter", pushkin, insertedGenre, null)));
+        em.refresh(pushkin);
+        final List<Book> bookByAuthor = bookService.findBookByAuthor(pushkin);
+        Assertions.assertFalse(bookByAuthor.isEmpty(), "Не удалось найти книгу по указанному автору");
     }
 
     @Test

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.annotation.DirtiesContext;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.dao.CommentDao;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
@@ -14,9 +14,7 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.BookService;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.BookServiceImpl;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.CommentService;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.CommentServiceImpl;
 
 import java.time.LocalDate;
 
@@ -25,7 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @DataJpaTest
-@Import({CommentServiceImpl.class, CommentDao.class, BookServiceImpl.class})
+//@Import({CommentServiceImpl.class, CommentDao.class, BookServiceImpl.class})
+@ComponentScan
 class CommentTest {
     private Author author = new Author((long) 1, "Blok", null);
     private Genre genre = new Genre((long) 1, "Poetry");
