@@ -3,8 +3,9 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.dao.BookDao;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +13,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class BookServiceImpl implements BookService {
-    BookDao bookDao;
+   private final BookDao bookDao;
 
     @Transactional
     @Override
@@ -20,31 +21,31 @@ public class BookServiceImpl implements BookService {
         bookDao.save(book);
     }
 
-    @Transactional
+
     @Override
     public List<Book> showAllBooks() {
         return bookDao.findAll();
     }
 
-    @Transactional
+
     @Override
     public List<Book> findBookByName(String bookName) {
         return bookDao.getByName(bookName);
     }
 
-    @Transactional
+
     @Override
-    public List<Book> findBookByAuthor(String authorName) {
-        return bookDao.getByAuthorName(authorName);
+    public List<Book> findBookByAuthor(Author author) {
+        return author.getBooks();
     }
 
-    @Transactional
+
     @Override
     public List<Book> findBookByGenre(String genre) {
         return bookDao.getByGenreName(genre);
     }
 
-    @Transactional
+
     @Override
     public Optional<Book> findBookById(Long id) {
         return bookDao.findById(id);

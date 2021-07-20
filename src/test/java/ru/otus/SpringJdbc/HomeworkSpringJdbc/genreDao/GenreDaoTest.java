@@ -13,13 +13,13 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
 
 @DataJpaTest
 class GenreDaoTest {
+    private Genre testGenre = new Genre((long) 2, "Non-fiction");
 
-    Genre testGenre = new Genre((long) 2, "Non-fiction");
     @Autowired
     private TestEntityManager em;
 
     @Autowired
-    GenreDao genreDao;
+    private GenreDao genreDao;
 
     @BeforeEach
     void setUp() {

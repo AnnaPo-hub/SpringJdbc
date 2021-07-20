@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class AuthorServiceImpl implements AuthorService {
-    AuthorDao authorDao;
+   private final AuthorDao authorDao;
 
     @Transactional
     @Override
@@ -20,19 +20,19 @@ public class AuthorServiceImpl implements AuthorService {
         return authorDao.save(author);
     }
 
-    @Transactional
+
     @Override
     public List<Author> getAll() {
         return authorDao.findAll();
     }
 
-    @Transactional
+
     @Override
     public List<Author> getByName(String authorName) {
         return authorDao.getByName(authorName);
     }
 
-    @Transactional
+
     @Override
     public Optional<Author> getById(Long id) {
         return authorDao.findById(id);

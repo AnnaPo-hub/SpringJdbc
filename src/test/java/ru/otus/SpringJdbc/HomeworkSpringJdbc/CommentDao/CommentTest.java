@@ -12,6 +12,7 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.CommentService;
 
 import java.time.LocalDate;
 
@@ -21,17 +22,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 class CommentTest {
-    Author author = new Author((long) 1, "Blok");
-    Genre genre = new Genre((long) 1, "Poetry");
-    Book testBook = new Book((long) 3, "BookforInsertCommentTest", author, genre, null);
-    Comment testComment = new Comment((long) 2, LocalDate.now(), "Must read", "Vasya", testBook);
+    private Author author = new Author((long) 1, "Blok",null);
+    private Genre genre = new Genre((long) 1, "Poetry");
+    private Book testBook = new Book((long) 3, "BookforInsertCommentTest", author, genre, null);
+    private Comment testComment = new Comment((long) 2, LocalDate.now(), "Must read", "Vasya", testBook);
 
     @Autowired
     private CommentDao commentDao;
 
     @Autowired
-    private TestEntityManager em;
+    private CommentService commentService;
 
+    @Autowired
+    private TestEntityManager em;
 
     private static Comment insertedComment;
 
@@ -51,7 +54,7 @@ class CommentTest {
     @DirtiesContext
     @Test
     public void getCommentByBookId() {
-        val commentByBookId = commentDao.getByBookId(testBook.getId());
+        val commentByBookId = commentService.getByBookId(testBook.getId());
         assertTrue(commentByBookId.get(0).getComment_text().matches("Must read"),
                 "Не удалось найти комментарий по указанному id");
     }

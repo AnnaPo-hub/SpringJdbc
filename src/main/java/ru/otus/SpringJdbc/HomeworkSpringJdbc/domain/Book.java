@@ -20,14 +20,14 @@ public class Book {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "author_id", foreignKey = @ForeignKey(name = "fk_author_id"))
+    @ManyToOne(targetEntity = Author.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_author_id"), nullable = false)
     private Author author;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "genre_id", foreignKey = @ForeignKey(name = "fk_genre_id"))
     private Genre genre;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.MERGE)
     private List<Comment> comment;
 }

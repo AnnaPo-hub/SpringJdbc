@@ -1,15 +1,10 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 
-import java.util.List;
-
-@Repository
+@Component
 public interface CommentDao extends JpaRepository<Comment, Long> {
-
-    List<Comment> getByBookId(long bookId);
-
     void deleteByBookId(Long id);
 }

@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class GenreServiceImpl implements GenreService {
-    GenreDao genreDao;
+    private final GenreDao genreDao;
 
     @Transactional
     @Override
@@ -20,19 +20,19 @@ public class GenreServiceImpl implements GenreService {
         return genreDao.save(genre);
     }
 
-    @Transactional
+
     @Override
     public List<Genre> getAll() {
         return genreDao.findAll();
     }
 
-    @Transactional
+
     @Override
     public List<Genre> getByName(String genreName) {
         return genreDao.getByName(genreName);
     }
 
-    @Transactional
+
     @Override
     public Optional<Genre> getById(Long id) {
         return genreDao.findById(id);

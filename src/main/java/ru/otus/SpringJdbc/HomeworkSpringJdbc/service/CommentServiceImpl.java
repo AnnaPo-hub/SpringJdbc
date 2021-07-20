@@ -4,19 +4,29 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.dao.CommentDao;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class CommentServiceImpl implements CommentService {
-    CommentDao commentDao;
+    private final CommentDao commentDao;
+    private final BookService bookService;
 
-    @Transactional
+
     @Override
-    public List<Comment> getCommentByBookId(long bookId) {
-        return commentDao.getByBookId(bookId);
+    public List<Comment> getByBookId(long bookId) {
+        List<Comment> comments = new ArrayList<>();
+        final Optional<Book> bookById = bookService.findBookById(bookId);
+        if (bookById.isPresent()) {
+            comments = bookById.get().getComment();
+
+        }
+        return comments;
     }
 
     @Transactional
