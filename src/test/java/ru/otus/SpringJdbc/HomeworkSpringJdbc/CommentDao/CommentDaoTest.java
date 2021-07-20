@@ -30,12 +30,16 @@ class CommentDaoTest {
     private Genre genre = new Genre((long) 1, "Poetry");
     private Book testBook = new Book((long) 3, "BookforInsertCommentTest", author, genre, null);
     private Comment testComment = new Comment((long) 2, LocalDate.now(), "Must read", "Vasya", testBook);
+
     @Autowired
     private TestEntityManager em;
+
     @Autowired
     private CommentDao commentDao;
+
     @Autowired
     private CommentService commentService;
+
     @Autowired
     private BookService bookService;
 
