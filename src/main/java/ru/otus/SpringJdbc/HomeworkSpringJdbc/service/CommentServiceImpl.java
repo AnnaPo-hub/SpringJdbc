@@ -23,7 +23,6 @@ public class CommentServiceImpl implements CommentService {
         final Optional<Book> bookById = bookService.findBookById(bookId);
         if (bookById.isPresent()) {
             comments = bookById.get().getComment();
-
         }
         return comments;
     }
