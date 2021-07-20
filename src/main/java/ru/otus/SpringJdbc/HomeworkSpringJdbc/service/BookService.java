@@ -8,7 +8,7 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import java.util.List;
 import java.util.Optional;
 @Component
-public interface BookService {
+public interface BookService  {
     void createBook(Book book);
 
     List<Book> showAllBooks();

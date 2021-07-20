@@ -6,13 +6,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.dao.CommentDao;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.BookService;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.BookServiceImpl;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.CommentService;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.CommentServiceImpl;
 
 import java.time.LocalDate;
 
@@ -21,8 +25,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @DataJpaTest
+@Import({CommentServiceImpl.class, CommentDao.class, BookServiceImpl.class})
 class CommentTest {
-    private Author author = new Author((long) 1, "Blok",null);
+    private Author author = new Author((long) 1, "Blok", null);
     private Genre genre = new Genre((long) 1, "Poetry");
     private Book testBook = new Book((long) 3, "BookforInsertCommentTest", author, genre, null);
     private Comment testComment = new Comment((long) 2, LocalDate.now(), "Must read", "Vasya", testBook);
@@ -32,6 +37,9 @@ class CommentTest {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private BookService bookService;
 
     @Autowired
     private TestEntityManager em;
