@@ -8,7 +8,6 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -16,20 +15,6 @@ import java.util.List;
 public class CommentsDaoJpa implements CommentDao {
     @PersistenceContext
     private EntityManager em;
-
-    @Override
-    public Comment insertComment(Comment comment) {
-        if (comment.getId() == 0) {
-            if (comment.getBook().getComment() == null) {
-                comment.getBook().setComment(new ArrayList<>());
-            }
-            comment.getBook().getComment().add(comment);
-            em.persist(comment);
-        } else {
-            return em.merge(comment);
-        }
-        return comment;
-    }
 
     @Override
     public void deleteCommentByBookId(Long bookId) {

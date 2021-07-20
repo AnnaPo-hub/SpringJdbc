@@ -7,6 +7,8 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.CommentDao.CommentDao;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +18,9 @@ import java.util.Optional;
 public class CommentServiceImpl implements CommentService {
     private final CommentDao commentDao;
     private final BookService bookService;
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
     public List<Comment> getCommentByBookId(long bookId) {
@@ -36,7 +41,17 @@ public class CommentServiceImpl implements CommentService {
 
     @Transactional
     @Override
-    public void insertComment(Comment comment) {
-        commentDao.insertComment(comment);
+    public Comment insertComment(Comment comment) {
+        if (comment.getId() == 0) {
+            if (comment.getBook().getComment() == null) {
+                comment.getBook().setComment(new ArrayList<>());
+            }
+            comment.getBook().getComment().add(comment);
+            em.persist(comment);
+        } else {
+            return em.merge(comment);
+        }
+        return comment;
     }
 }
+

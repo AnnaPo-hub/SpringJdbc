@@ -18,13 +18,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DataJpaTest
 @Import(AuthorDaoJpa.class)
 class AuthorDaoJpaTest {
+    private static Author testAuthor;
     @Autowired
     private AuthorDaoJpa authorDaoJpa;
-
     @Autowired
     private TestEntityManager em;
-
-    private static Author testAuthor;
 
     @BeforeEach
     void setUp() {

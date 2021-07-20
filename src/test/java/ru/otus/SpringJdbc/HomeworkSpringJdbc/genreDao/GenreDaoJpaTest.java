@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.CommentDao.CommentsDaoJpa;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.authorDao.AuthorDaoJpa;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.bookDao.BookDaoJpa;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,10 +22,9 @@ class GenreDaoJpaTest {
 
     Genre testGenre = new Genre((long) 2, "Non-fiction");
     @Autowired
-    private TestEntityManager em;
-
-    @Autowired
     GenreDaoJpa genreDaoJpa;
+    @Autowired
+    private TestEntityManager em;
 
     @BeforeEach
     void setUp() {

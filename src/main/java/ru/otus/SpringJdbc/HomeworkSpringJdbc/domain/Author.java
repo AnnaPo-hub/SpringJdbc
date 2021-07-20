@@ -22,5 +22,4 @@ public class Author {
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.MERGE)
     private List<Book> books;
-
 }

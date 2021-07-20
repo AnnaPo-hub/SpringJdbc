@@ -31,8 +31,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @Import({BookDaoJpa.class, CommentsDaoJpa.class, GenreDaoJpa.class, AuthorDaoJpa.class, CommentServiceImpl.class, BookServiceImpl.class})
 class CommentsDaoJpaTest {
-    private Author author = new Author((long) 1, "Blok", null);
     private final Genre genre = new Genre((long) 1, "Poetry");
+    private Author author = new Author((long) 1, "Blok", null);
     private Book testbook = new Book((long) 3, "BookforInsertCommentTest", author, genre, null);
     private final Comment testComment = new Comment((long) 2, LocalDate.now(), "Must read", "Vasya", testbook);
     private Comment insertedComment;
@@ -52,7 +52,7 @@ class CommentsDaoJpaTest {
     @BeforeEach
     void setUp() {
         libraryRepository.insertBook(testbook);
-        insertedComment = commentsDaoJpa.insertComment(testComment);
+        insertedComment = commentService.insertComment(testComment);
     }
 
     @DirtiesContext

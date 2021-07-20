@@ -30,14 +30,14 @@ class BookServiceImplTest {
     private BookDaoJpa bookDao;
 
     @Autowired
-    private  BookService bookService;
+    private BookService bookService;
 
     @Autowired
     private AuthorService authorService;
 
     @Test
     void shouldCreateBook() {
-        Author author = new Author((long) 1, "Blok",null);
+        Author author = new Author((long) 1, "Blok", null);
         Genre genre = new Genre((long) 1, "Poetry");
         Book testbook = new Book((long) 3, "BookforInsertTest", author, genre, null);
         Book savedBook = bookDao.insertBook(testbook);
@@ -84,7 +84,7 @@ class BookServiceImplTest {
 
     @Test
     void shouldDeleteBookById() {
-        Author author = new Author((long) 1, "Blok",null);
+        Author author = new Author((long) 1, "Blok", null);
         Genre genre = new Genre((long) 1, "Poetry");
         Book testbook = new Book((long) 4, "BookforInsertTest", author, genre, null);
         final Book savedBook = bookDao.insertBook(testbook);

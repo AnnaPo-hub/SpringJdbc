@@ -51,6 +51,4 @@ public class BookServiceImpl implements BookService {
     public void deleteBookById(Long id) {
         bookDao.deleteBookById(id);
     }
-
-
 }
