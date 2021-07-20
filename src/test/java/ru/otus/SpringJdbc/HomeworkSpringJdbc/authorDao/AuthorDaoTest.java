@@ -17,17 +17,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 class AuthorDaoTest {
+    private static Author testAuthor;
     @Autowired
     private AuthorDao authorDao;
-
     @Autowired
     private TestEntityManager em;
 
-    private static Author testAuthor;
-
     @BeforeEach
     void setUp() {
-        testAuthor = new Author((long) 3, "Lermontov",null);
+        testAuthor = new Author((long) 3, "Lermontov", null);
         authorDao.save(testAuthor);
     }
 
@@ -41,7 +39,7 @@ class AuthorDaoTest {
     @DirtiesContext
     @Test
     public void getAll() {
-        final List<Author> allAuthors =  authorDao.findAll();
+        final List<Author> allAuthors = authorDao.findAll();
         assertEquals(3, allAuthors.size(), "Общее количество авторов не соответствует ожидаемому");
     }
 

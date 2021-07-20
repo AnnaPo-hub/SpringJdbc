@@ -1,7 +1,7 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.dao.GenreDao;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
@@ -9,7 +9,7 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Component
 @AllArgsConstructor
 public class GenreServiceImpl implements GenreService {
     private final GenreDao genreDao;
@@ -20,18 +20,15 @@ public class GenreServiceImpl implements GenreService {
         return genreDao.save(genre);
     }
 
-
     @Override
     public List<Genre> getAll() {
         return genreDao.findAll();
     }
 
-
     @Override
     public List<Genre> getByName(String genreName) {
         return genreDao.getByName(genreName);
     }
-
 
     @Override
     public Optional<Genre> getById(Long id) {

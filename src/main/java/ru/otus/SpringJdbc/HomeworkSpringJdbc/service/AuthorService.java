@@ -1,10 +1,11 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 
+import org.springframework.stereotype.Service;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public interface AuthorService {
     Author insert(Author author);
 

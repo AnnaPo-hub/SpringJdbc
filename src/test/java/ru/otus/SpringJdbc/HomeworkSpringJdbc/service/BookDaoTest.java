@@ -19,8 +19,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-//@Import({BookDao.class,  BookServiceImpl.class})
-@ComponentScan
+@ComponentScan(basePackages = {"ru.otus.SpringJdbc.HomeworkSpringJdbc"})
 class BookDaoTest {
     @Autowired
     private TestEntityManager em;

@@ -23,31 +23,27 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @DataJpaTest
-//@Import({CommentServiceImpl.class, CommentDao.class, BookServiceImpl.class})
-@ComponentScan
-class CommentTest {
+@ComponentScan(basePackages = {"ru.otus.SpringJdbc.HomeworkSpringJdbc"})
+class CommentDaoTest {
+    private static Comment insertedComment;
     private Author author = new Author((long) 1, "Blok", null);
     private Genre genre = new Genre((long) 1, "Poetry");
     private Book testBook = new Book((long) 3, "BookforInsertCommentTest", author, genre, null);
     private Comment testComment = new Comment((long) 2, LocalDate.now(), "Must read", "Vasya", testBook);
-
+    @Autowired
+    private TestEntityManager em;
     @Autowired
     private CommentDao commentDao;
-
     @Autowired
     private CommentService commentService;
-
     @Autowired
     private BookService bookService;
 
-    @Autowired
-    private TestEntityManager em;
-
-    private static Comment insertedComment;
-
     @BeforeEach
     void setUp() {
+        final Book book = bookService.createBook(testBook);
         insertedComment = commentDao.save(testComment);
+        em.refresh(book);
     }
 
     @DirtiesContext
@@ -71,7 +67,7 @@ class CommentTest {
     public void deleteCommentByBookId() {
         val comment = em.find(Comment.class, testComment.getId());
         assertThat(comment).isNotNull();
-        em.detach(comment);
+        em.refresh(comment);
         commentDao.deleteByBookId(testBook.getId());
         val deletedComment = em.find(Comment.class, insertedComment.getId());
         assertThat(deletedComment).isNull();

@@ -1,7 +1,7 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.dao.BookDao;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
@@ -10,17 +10,16 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Component
 @AllArgsConstructor
 public class BookServiceImpl implements BookService {
    private final BookDao bookDao;
 
     @Transactional
     @Override
-    public void createBook(Book book) {
-        bookDao.save(book);
+    public Book createBook(Book book) {
+      return bookDao.save(book);
     }
-
 
     @Override
     public List<Book> showAllBooks() {

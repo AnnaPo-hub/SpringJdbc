@@ -17,7 +17,6 @@ public class CommentServiceImpl implements CommentService {
     private final CommentDao commentDao;
     private final BookService bookService;
 
-
     @Override
     public List<Comment> getByBookId(long bookId) {
         List<Comment> comments = new ArrayList<>();

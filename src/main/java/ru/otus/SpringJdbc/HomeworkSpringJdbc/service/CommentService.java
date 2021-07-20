@@ -1,12 +1,11 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 
 import java.util.List;
-@Component
+@Service
 public interface CommentService {
-
     List<Comment> getByBookId(long bookId);
 
     void deleteCommentByBookId(Long id);

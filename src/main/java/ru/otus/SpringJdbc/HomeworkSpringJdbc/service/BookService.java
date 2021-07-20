@@ -1,15 +1,15 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 
 import java.util.List;
 import java.util.Optional;
-@Component
+@Service
 public interface BookService  {
-    void createBook(Book book);
+    Book createBook(Book book);
 
     List<Book> showAllBooks();
 
