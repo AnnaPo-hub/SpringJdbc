@@ -15,18 +15,18 @@ import java.time.LocalDate;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "date")
-    LocalDate date;
+    private LocalDate date;
 
     @Column(name = "comment_text")
-    String comment_text;
+    private String comment_text;
 
     @Column(name = "author")
-    String author;
+    private String author;
 
     @ManyToOne(targetEntity = Book.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "book_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_book_id"), nullable = false)
-    Book book;
+    private Book book;
 }

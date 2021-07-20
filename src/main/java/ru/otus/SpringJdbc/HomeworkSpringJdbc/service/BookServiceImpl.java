@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class LibraryServiceImpl implements LibraryService {
+public class BookServiceImpl implements BookService {
     BookDao bookDao;
 
     @Transactional

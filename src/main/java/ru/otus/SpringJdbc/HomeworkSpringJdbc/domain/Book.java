@@ -15,19 +15,19 @@ import java.util.List;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "name")
-    String name;
+    private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id", foreignKey = @ForeignKey(name = "fk_author_id"))
-    Author author;
+    private Author author;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "genre_id", foreignKey = @ForeignKey(name = "fk_genre_id"))
-    Genre genre;
+    private Genre genre;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    List<Comment> comment;
+    private List<Comment> comment;
 }
