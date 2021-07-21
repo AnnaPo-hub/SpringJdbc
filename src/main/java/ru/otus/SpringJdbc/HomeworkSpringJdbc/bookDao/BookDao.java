@@ -4,7 +4,6 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc.bookDao;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface BookDao {
     List<Book> getAll();
@@ -13,7 +12,7 @@ public interface BookDao {
 
     List<Book> getBookByGenre(String genre);
 
-    Optional<Book> getBookById(Long id);
+    Book getBookById(Long id);
 
     Book insertBook(Book book);
 

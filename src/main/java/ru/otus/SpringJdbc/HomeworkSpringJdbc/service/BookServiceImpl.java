@@ -42,7 +42,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Optional<Book> findBookById(Long id) {
+    public Book findBookById(Long id) {
         return bookDao.getBookById(id);
     }
 

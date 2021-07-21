@@ -78,7 +78,7 @@ class BookServiceImplTest {
     void shouldFindBookById() {
         val actualBook = bookDao.getBookById((long) 1);
         val expectedBook = em.find(Book.class, (long) 1);
-        assertThat(actualBook).isPresent().get().usingRecursiveComparison().isEqualTo(expectedBook);
+        assertThat(actualBook).isNotNull().usingRecursiveComparison().isEqualTo(expectedBook);
 
     }
 

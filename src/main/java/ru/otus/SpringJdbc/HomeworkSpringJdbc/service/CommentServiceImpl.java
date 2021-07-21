@@ -11,7 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 @AllArgsConstructor
@@ -30,10 +29,9 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> getCommentByBookId(long bookId) {
         List<Comment> comments = new ArrayList<>();
-        final Optional<Book> bookById = bookService.findBookById(bookId);
-        if (bookById.isPresent()) {
-            comments = bookById.get().getComment();
-
+        final Book bookById = bookService.findBookById(bookId);
+        if (bookById!=null) {
+            comments = bookById.getComment();
         }
         return comments;
     }

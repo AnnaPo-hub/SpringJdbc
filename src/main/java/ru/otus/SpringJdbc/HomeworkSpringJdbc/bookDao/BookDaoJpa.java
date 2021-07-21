@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 
+import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class BookDaoJpa implements BookDao {
@@ -54,15 +54,19 @@ public class BookDaoJpa implements BookDao {
     }
 
     @Override
-    public Optional<Book> getBookById(Long id) {
-        return Optional.ofNullable(em.find(Book.class, id));
+    public Book getBookById(Long id) {
+        EntityGraph<?> entityGraph = em.getEntityGraph("comments-entity-graph");
+        TypedQuery<Book> query = em.createQuery("select b from Book b where b.id = :id", Book.class);
+        query.setParameter("id", id);
+        query.setHint("javax.persistence.fetchgraph", entityGraph);
+        return query.getSingleResult();
     }
 
     @Override
     public void deleteBookById(Long id) {
         val book = getBookById(id);
-        if (book.isPresent()) {
-            em.remove(book.get());
+        if (book !=null) {
+            em.remove(book);
         }
     }
 }
