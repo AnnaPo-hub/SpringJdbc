@@ -1,6 +1,5 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.CommentDao;
 
-import lombok.val;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,8 +22,6 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.CommentServiceImpl;
 
 import java.time.LocalDate;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 
 @Transactional
@@ -75,7 +72,7 @@ class CommentsDaoJpaTest {
     public void deleteCommentByBookId() {
         em.refresh(insertedComment);
         commentsDaoJpa.deleteCommentByBookId(testbook.getId());
-        val deletedComment = em.find(Comment.class, insertedComment.getId());
-        assertThat(deletedComment).isNull();
+        final List<Comment> all = commentService.getAllByBook(testbook.getId());
+        Assertions.assertEquals(0, all.size());
     }
 }

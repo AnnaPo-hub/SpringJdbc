@@ -23,6 +23,11 @@ public class CommentServiceImpl implements CommentService {
     private EntityManager em;
 
     @Override
+    public List<Comment> getAllByBook(long bookId) {
+        return commentDao.getAllByBook(bookId);
+    }
+
+    @Override
     public List<Comment> getCommentByBookId(long bookId) {
         List<Comment> comments = new ArrayList<>();
         final Optional<Book> bookById = bookService.findBookById(bookId);

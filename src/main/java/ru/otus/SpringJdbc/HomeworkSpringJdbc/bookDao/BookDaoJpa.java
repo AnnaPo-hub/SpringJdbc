@@ -3,6 +3,7 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc.bookDao;
 
 import lombok.val;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 
 import javax.persistence.EntityManager;
@@ -27,6 +28,7 @@ public class BookDaoJpa implements BookDao {
         return query.getResultList();
     }
 
+    @Transactional
     @Override
     public Book insertBook(Book book) {
         if (book.getId() == 0) {
