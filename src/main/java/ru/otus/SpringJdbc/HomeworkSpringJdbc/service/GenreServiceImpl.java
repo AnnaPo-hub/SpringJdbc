@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.genreDao.GenreDao;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.repositories.GenreDao;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +22,7 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public List<Genre> getAll() {
-        return genreDao.getAll();
+        return genreDao.findAll();
     }
 
     @Override

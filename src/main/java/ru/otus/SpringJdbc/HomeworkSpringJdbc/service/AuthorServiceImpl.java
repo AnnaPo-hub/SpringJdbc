@@ -3,8 +3,8 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.authorDao.AuthorDao;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.repositories.AuthorDao;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +22,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public List<Author> getAll() {
-        return authorDao.getAll();
+        return authorDao.findAll();
     }
 
     @Override
@@ -39,6 +39,5 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public void deleteById(Long id) {
         authorDao.deleteById(id);
-
     }
 }

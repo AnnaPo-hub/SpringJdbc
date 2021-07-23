@@ -3,30 +3,30 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
+
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Table(name = "comment")
+@Document(collection = "comment")
 public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "date")
+    @Field(name = "date")
     private LocalDate date;
 
-    @Column(name = "comment_text")
+    @Field(name = "comment_text")
     private String comment_text;
 
-    @Column(name = "author")
+    @Field(name = "author")
     private String author;
 
-    @ManyToOne(targetEntity = Book.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "book_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_book_id"), nullable = false)
+    @Field(name = "book_id")
     private Book book;
 }

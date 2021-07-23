@@ -3,23 +3,23 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Data
-@Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Table(name = "author")
+@Document(collection = "author")
 public class Author {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Field(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.MERGE)
+    @Field(name = "books")
     private List<Book> books;
 }

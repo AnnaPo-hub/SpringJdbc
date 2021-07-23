@@ -11,5 +11,5 @@ public interface CommentService {
 
     void deleteCommentByBookId(Long id);
 
-    Comment insertComment(Comment comment);
+   // Comment insertComment(Comment comment);
 }

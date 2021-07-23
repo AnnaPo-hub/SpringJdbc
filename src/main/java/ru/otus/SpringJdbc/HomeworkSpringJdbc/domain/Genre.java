@@ -3,18 +3,19 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.persistence.*;
 
-@Entity
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Table(name = "genre")
+@Document(collection = "genre")
 public class Genre {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name")
+
+    @Field(name = "name")
     private String name;
 }
