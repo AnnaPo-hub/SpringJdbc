@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 
-import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -55,10 +54,8 @@ public class BookDaoJpa implements BookDao {
 
     @Override
     public Book getBookById(Long id) {
-        EntityGraph<?> entityGraph = em.getEntityGraph("comments-entity-graph");
         TypedQuery<Book> query = em.createQuery("select b from Book b where b.id = :id", Book.class);
         query.setParameter("id", id);
-        query.setHint("javax.persistence.fetchgraph", entityGraph);
         return query.getSingleResult();
     }
 

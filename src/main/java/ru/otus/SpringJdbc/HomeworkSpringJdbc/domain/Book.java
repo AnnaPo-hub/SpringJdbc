@@ -14,8 +14,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Getter
 @Table(name = "book")
-@NamedEntityGraph(name = "comments-entity-graph",
-        attributeNodes = {@NamedAttributeNode("comment")})
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
