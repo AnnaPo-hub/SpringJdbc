@@ -1,9 +1,8 @@
 spring:
   data:
     mongodb:
-      port: 0
-      ##27017
-      database: company
+      port: 27017
+      database: lib
 
 
 

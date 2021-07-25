@@ -3,9 +3,9 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.repositories.BookDao;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.repositories.BookDao;
 
 import java.util.List;
 
@@ -17,6 +17,7 @@ public class BookServiceImpl implements BookService {
     @Transactional
     @Override
     public Book createBook(Book book) {
+
       return  bookDao.insert(book);
     }
 

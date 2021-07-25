@@ -2,8 +2,9 @@ spring:
   data:
     mongodb:
       port: 27017
-      ##27017
-      database: lib
+      host: localhost
+      database: book
+
 
   mongo-db:
     write-concern:
