@@ -12,8 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 public class CommentServiceImpl implements CommentService {
     private final CommentDao commentDao;
-    private final BookService bookService;
-
 
     @Override
     public List<Comment> getByBookId(long bookId) {

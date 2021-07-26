@@ -24,15 +24,4 @@ public class Book {
 
     @Field(name = "genre_id")
     private Genre genre;
-
-//    @Field(name = "comments")
-//    private List<Comment> comment;
-
-
-    public Book( String name, Author author, Genre genre ){
-        this.name = name;
-        this.author=author;
-        this.genre= genre;
-        //this.comment = Arrays.asList(comment);
-    }
 }
