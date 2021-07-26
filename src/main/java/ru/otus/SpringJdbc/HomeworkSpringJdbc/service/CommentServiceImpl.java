@@ -3,11 +3,9 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.repositories.CommentDao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -18,18 +16,8 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
-    public List<Comment> getAllByBook(long bookId) {
-        return commentDao.getAllByBook(bookId);
-    }
-
-    @Override
     public List<Comment> getByBookId(long bookId) {
-        List<Comment> comments = new ArrayList<>();
-        final Book bookById = bookService.findBookById(bookId);
-        if (bookById != null) {
-            comments = bookById.getComment();
-        }
-        return comments;
+        return commentDao.getAllByBookId(bookId);
     }
 
     @Transactional

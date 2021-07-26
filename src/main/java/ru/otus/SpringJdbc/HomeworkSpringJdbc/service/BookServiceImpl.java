@@ -3,7 +3,6 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.repositories.BookDao;
 
@@ -32,8 +31,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> findBookByAuthor(Author author) {
-        return author.getBooks();
+    public List<Book> findBookByAuthor(String author) {
+        return bookDao.findBookByAuthor(author);
     }
 
     @Override

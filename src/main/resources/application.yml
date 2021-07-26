@@ -6,13 +6,12 @@ spring:
       database: book
 
 
+mongock:
+  runner-type: "ApplicationRunner" # default
+  #runner-type: "InitializingBean"
+  change-logs-scan-package:
+    - ru.otus.spring.mongock.changelog
   mongo-db:
     write-concern:
       journal: false
     read-concern: local
-
-
-
-logging:
-  level:
-    ROOT: ERROR
