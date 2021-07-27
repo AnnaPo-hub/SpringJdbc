@@ -8,7 +8,6 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import java.util.List;
 
 public interface BookDao extends MongoRepository<Book, String> {
-
     List<Book> getByName(String bookName);
 
     @Query(value = "{'genre_id.name': ?0}", fields = "{'name': 1, 'author_id.name': 1,'author_id._id': 1, 'genre_id.name': 1, 'genre_id._id': 1}")
