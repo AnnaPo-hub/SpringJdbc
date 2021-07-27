@@ -25,9 +25,6 @@
 //import java.util.List;
 //
 //
-//@Transactional
-//@DataJpaTest
-//@Import({BookDao.class, CommentDao.class, GenreDao.class, AuthorDao.class, CommentServiceImpl.class, BookServiceImpl.class})
 //class CommentsDaoJpaTest {
 //    private final Genre genre = new Genre((long) 1, "Poetry");
 //    private Author author = new Author((long) 1, "Blok", null);
@@ -41,8 +38,6 @@
 //    @Autowired
 //    private BookDao libraryRepository;
 //
-//    @Autowired
-//    private TestEntityManager em;
 //
 //    @Autowired
 //    private CommentService commentService;

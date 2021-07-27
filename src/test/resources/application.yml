@@ -1,11 +1,8 @@
 spring:
   data:
     mongodb:
-      port: 27017
-      database: lib
-
-
-
+      port: 0
+      database: test
 logging:
   level:
     ROOT: ERROR

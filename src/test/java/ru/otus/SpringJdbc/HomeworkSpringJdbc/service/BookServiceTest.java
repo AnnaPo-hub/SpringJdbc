@@ -20,11 +20,8 @@
 //import static org.assertj.core.api.Assertions.assertThat;
 //import static org.junit.jupiter.api.Assertions.assertNull;
 //
-//@DataJpaTest
-//@Import({BookDao.class, AuthorDao.class, BookServiceImpl.class, AuthorServiceImpl.class})
 //class BookServiceTest {
-//    @Autowired
-//    private TestEntityManager em;
+
 //
 //    @Autowired
 //    private BookDao bookDao;

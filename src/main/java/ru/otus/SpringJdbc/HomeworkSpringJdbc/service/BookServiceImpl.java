@@ -16,7 +16,6 @@ public class BookServiceImpl implements BookService {
     @Transactional
     @Override
     public Book createBook(Book book) {
-
         return bookDao.insert(book);
     }
 
