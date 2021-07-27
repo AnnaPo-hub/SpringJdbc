@@ -1,15 +1,15 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 
 import lombok.AllArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.CommentDao.CommentDao;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.dto.CommentDto;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CommentServiceImpl implements CommentService {
     private final CommentDao commentDao;
+    private final BookService bookService;
 
     @PersistenceContext
     private EntityManager em;
@@ -27,13 +28,14 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDto> getCommentByBookId(long bookId) {
-        TypedQuery<CommentDto> q = em.createQuery(
-                "SELECT new ru.otus.SpringJdbc.HomeworkSpringJdbc.dto.CommentDto(b.id, c.comment_text, c.author,c.date) FROM Book b  JOIN b.comment c where b.id =:bookId",
-                CommentDto.class);
-        q.setParameter("bookId", bookId);
-
-        return q.getResultList();
+    public List<Comment> getCommentByBookId(long bookId) {
+        List<Comment> comments = new ArrayList<>();
+        final Book bookById = bookService.findBookById(bookId);
+        Hibernate.initialize(bookById);
+        if (bookById!=null) {
+            comments = bookById.getComment();
+        }
+        return comments;
     }
 
     @Transactional

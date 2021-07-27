@@ -15,7 +15,6 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Comment;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.dto.CommentDto;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.genreDao.GenreDaoJpa;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.BookServiceImpl;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.CommentService;
@@ -64,12 +63,8 @@ class CommentsDaoJpaTest {
     @DirtiesContext
     @Test
     public void getCommentByBookId() {
-       // final Comment comment = commentService.insertComment(testComment2);
-       // em.refresh(insertedComment);
-      //  em.refresh(comment);
-        final List<CommentDto> commentByBookId = commentService.getCommentByBookId(testbook.getId());
-        System.out.println(commentByBookId);
-       // Assertions.assertTrue(commentByBookId.get(0).getComment_text().matches("Must read"));
+        final List<Comment> commentByBookId = commentService.getAllByBook(testbook.getId());
+        Assertions.assertTrue(commentByBookId.get(0).getComment_text().matches("Must read"));
     }
 
     @DirtiesContext
