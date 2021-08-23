@@ -1,5 +1,6 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,12 +17,15 @@ public class Book {
     @Id
     private Long id;
 
+    @JsonProperty("name")
     @Field(name = "name")
     private String name;
 
+    @JsonProperty("author")
     @Field(name = "author_id")
     private Author author;
 
+    @JsonProperty("genre")
     @Field(name = "genre_id")
     private Genre genre;
 }
