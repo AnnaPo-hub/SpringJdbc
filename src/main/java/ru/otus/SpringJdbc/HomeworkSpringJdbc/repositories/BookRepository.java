@@ -7,8 +7,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 
-public interface BookDao extends ReactiveMongoRepository<Book, String> {
-    Flux<Book> findAll();
+public interface BookRepository extends ReactiveMongoRepository<Book, String> {
+
 
     Mono<Book> getById(Long id);
 

@@ -26,6 +26,6 @@ public class Book {
     private Author author;
 
     @JsonProperty("genre")
-    @Field(name = "genre_id")
-    private Genre genre;
+    @Field(name = "genre")
+    private String genre;
 }
