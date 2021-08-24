@@ -1,6 +1,6 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.rest;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -8,7 +8,7 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.repositories.BookRepository;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.rest.dto.BookDto;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 public class BookController {
     private final BookRepository bookRepository;
@@ -19,17 +19,17 @@ public class BookController {
     }
 
     @GetMapping("/api/book/{id}")
-    public Mono<Book> getById(@PathVariable("id") long id) {
-        return bookRepository.getById(id);
+    public Mono<Book> getById(@PathVariable("id") String id) {
+        return bookRepository.findById(id);
     }
 
     @PostMapping("/api/book")
-    public Mono<Book>add(@RequestBody Mono<Book> book) {
-        return  bookRepository.save(book);
+    public Mono<Book> add(@RequestBody BookDto book) {
+       return bookRepository.save(book.toBook());
     }
 
     @DeleteMapping("/api/book/{id}")
-    public void delete(@PathVariable("id") long id) {
-        bookRepository.deleteById(id);
+    public Mono<Void> delete(@PathVariable("id") String id) {
+      return bookRepository.deleteById(id);
     }
 }

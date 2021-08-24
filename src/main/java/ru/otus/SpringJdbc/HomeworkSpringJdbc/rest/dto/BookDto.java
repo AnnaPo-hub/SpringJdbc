@@ -9,12 +9,17 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookDto {
-    private Long id;
+    private String id;
     private String name;
     private String author;
     private String genre;
 
     public static BookDto toDto(Book book) {
-        return new BookDto(book.getId(), book.getName(), book.getAuthor().getName(), book.getGenre());
+        return new BookDto(book.getId(), book.getName(), book.getName(), book.getGenre());
     }
+
+    public Book toBook() {
+        return new Book(id, name, author, genre);
+    }
+
 }

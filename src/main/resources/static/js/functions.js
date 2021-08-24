@@ -13,7 +13,7 @@ function printAllBooks(books){
             <td>${book.author}</td>
             <td>${book.genre}</td>
             <td>
-               <button onclick="deleteBook(${book.id})">Delete</button>
+               <button onclick="deleteBook('${book.id}')">Delete</button>
              </td>
              </tr>
              `)
@@ -32,12 +32,14 @@ function printAllBooks(books){
          $.ajax({
              type: 'DELETE',
              url: '/api/book/' + id,
-             success: function() {
-                 $('tbody').children().remove();
+             success: function () {
+                $('tbody').children().remove();
              getAllBooks();
+             },
+             error: function(e){
              }
          });
-     }
+  }
 
 
 
