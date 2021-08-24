@@ -38,7 +38,7 @@
 
 
 <h1>Books:</h1>
-<table class="books">
+<table class="books" id="books">
     <thead>
     <tr>
         <th>ID</th>
@@ -47,7 +47,7 @@
         <th>Genre</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="existingBooks">
     </tbody>
 </table>
 
@@ -80,7 +80,8 @@
                     url: "/api/book",
                     data: JSON.stringify(formData),
                     success: function () {
-                       // location.reload();
+                        $('#existingBooks').empty();
+                          getAllBooks();
                     },
                     error: function (error) {
                         alert("Error message:" + error.responseText);
