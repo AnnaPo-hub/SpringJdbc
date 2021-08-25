@@ -15,7 +15,7 @@ public class BookDto {
     private String genre;
 
     public static BookDto toDto(Book book) {
-        return new BookDto(book.getId(), book.getName(), book.getName(), book.getGenre());
+        return new BookDto(book.getId(), book.getName(), book.getAuthor(), book.getGenre());
     }
 
     public Book toBook() {
