@@ -21,5 +21,4 @@ public class BookDto {
     public Book toBook() {
         return new Book(id, name, author, genre);
     }
-
 }

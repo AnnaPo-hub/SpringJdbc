@@ -17,7 +17,7 @@ public class WebFluxApp {
         ApplicationContext context = SpringApplication.run(WebFluxApp.class);
         BookRepository bookRepository = context.getBean(BookRepository.class);
 
-        Book testBook = new  Book();
+        Book testBook = new Book();
         testBook.setAuthor("Anna");
         testBook.setName("The Ladoga");
         testBook.setGenre("Adventure");
@@ -31,7 +31,7 @@ public class WebFluxApp {
 
         )).subscribe(p -> System.out.println(p.getName()));
 
-       bookRepository.save(testBook).subscribe(p-> System.out.println(p.getGenre()));
+        bookRepository.save(testBook).subscribe(p -> System.out.println(p.getGenre()));
     }
 }
 

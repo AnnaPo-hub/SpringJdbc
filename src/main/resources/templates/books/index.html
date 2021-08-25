@@ -13,6 +13,7 @@
             padding: 5px;
         }
 
+
     </style>
     <!--<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -21,19 +22,19 @@
 <body>
 <h3>You can add new book here:</h3>
 <form id="new-book-form" class="w3-container">
-<div>
-    <div class="row">
-        <label for="name">Enter book name:</label>
-        <input id="name" name="name" type="text"/>
-        <label for="author">Enter author:</label>
-        <input id="author" name="author" type="text"/>
-        <label for="genre">Enter genre:</label>
-        <input id="genre" name="genre" type="text"/>
+    <div>
         <div class="row">
-            <button type="submit" id="save-book-btn" class="w3-btn w3-aqua">Save book</button>
+            <label for="name">Enter book name:</label>
+            <input id="name" name="name" type="text"/>
+            <label for="author">Enter author:</label>
+            <input id="author" name="author" type="text"/>
+            <label for="genre">Enter genre:</label>
+            <input id="genre" name="genre" type="text"/>
+            <div class="row">
+                <button type="submit" id="save-book-btn" class="w3-btn w3-aqua">Save book</button>
+            </div>
         </div>
     </div>
-</div>
 </form>
 
 
@@ -90,6 +91,7 @@
             }
         });
     });
+
 </script>
 </body>
 </html>

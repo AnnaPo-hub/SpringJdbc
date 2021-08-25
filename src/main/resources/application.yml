@@ -4,10 +4,3 @@ spring:
       port: 27017
       host: localhost
       database: boo
-
-
-mongock:
-  runner-type: "ApplicationRunner" # default
-  #runner-type: "InitializingBean"
-  change-logs-scan-package:
-    - ru.otus.spring.mongock.changelog

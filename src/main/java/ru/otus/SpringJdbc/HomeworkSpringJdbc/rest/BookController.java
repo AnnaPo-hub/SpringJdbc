@@ -25,11 +25,11 @@ public class BookController {
 
     @PostMapping("/api/book")
     public Mono<Book> add(@RequestBody BookDto book) {
-       return bookRepository.save(book.toBook());
+        return bookRepository.save(book.toBook());
     }
 
     @DeleteMapping("/api/book/{id}")
     public Mono<Void> delete(@PathVariable("id") String id) {
-      return bookRepository.deleteById(id);
+        return bookRepository.deleteById(id);
     }
 }
