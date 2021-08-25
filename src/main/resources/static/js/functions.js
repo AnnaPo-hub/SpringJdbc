@@ -13,7 +13,7 @@ function printAllBooks(books){
             <td>${book.author}</td>
             <td>${book.genre}</td>
             <td>
-               <button onclick="deleteBook('${book.id}')">Delete</button>
+              <input id = "deleteBook" type = "button" value = "Delete" onclick="deleteBook('${book.id}')"/>
              </td>
              </tr>
              `)
@@ -33,8 +33,8 @@ function printAllBooks(books){
              type: 'DELETE',
              url: '/api/book/' + id,
              success: function () {
-                $('#existingBooks')).children().remove();
-             getAllBooks();
+                 $('#existingBooks').empty();
+                 getAllBooks();
              },
              error: function(e){
              }
