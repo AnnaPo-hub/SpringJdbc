@@ -1,6 +1,10 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -14,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.lang.NonNull;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 
 import javax.persistence.EntityManagerFactory;
@@ -22,6 +27,8 @@ import javax.persistence.EntityManagerFactory;
 @EnableBatchProcessing
 public class BatchConfiguration {
     private static final int CHUNK_SIZE = 2;
+    private final Logger logger = LoggerFactory.getLogger("Batch");
+
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
 
@@ -30,6 +37,9 @@ public class BatchConfiguration {
 
     @Autowired
     private EntityManagerFactory entityManagerFactory;
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     @Bean
     public JpaPagingItemReader<Book> reader() {
@@ -41,15 +51,30 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public MongoItemWriter<Book> writer(MongoTemplate mongoTemplate) {
-        return new MongoItemWriterBuilder<Book>().template(mongoTemplate).collection("book").build();
+    public MongoItemWriter<Book> writer() {
+        return new MongoItemWriterBuilder<Book>()
+                .template(mongoTemplate)
+                .collection("book")
+                .build();
     }
+
 
     @Bean
     public Job bookJob() {
         return jobBuilderFactory.get("bookJob")
                 .incrementer(new RunIdIncrementer())
                 .start(step1())
+                .listener(new JobExecutionListener() {
+                    @Override
+                    public void beforeJob(@NonNull JobExecution jobExecution) {
+                        logger.info("Начало job");
+                    }
+
+                    @Override
+                    public void afterJob(@NonNull JobExecution jobExecution) {
+                        logger.info("Конец job");
+                    }
+                })
                 .build();
     }
 
