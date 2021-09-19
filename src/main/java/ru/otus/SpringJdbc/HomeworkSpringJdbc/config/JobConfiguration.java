@@ -6,8 +6,12 @@ import org.springframework.batch.core.*;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.scope.context.ChunkContext;
+import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.MongoItemWriter;
 import org.springframework.batch.item.data.builder.MongoItemWriterBuilder;
 import org.springframework.batch.item.database.JpaPagingItemReader;
@@ -17,14 +21,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.lang.NonNull;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.dao.BookDao;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.MongoBook;
+import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.TransformBookService;
 
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 @Configuration
 @EnableBatchProcessing
-public class BatchConfiguration {
+public class JobConfiguration {
     private static final int CHUNK_SIZE = 2;
     private final Logger logger = LoggerFactory.getLogger("Batch");
 
@@ -40,6 +47,7 @@ public class BatchConfiguration {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    @StepScope
     @Bean
     public JpaPagingItemReader<Book> reader() {
         return new JpaPagingItemReaderBuilder<Book>().name("jpaPagingItemReader")
@@ -49,9 +57,16 @@ public class BatchConfiguration {
                 .build();
     }
 
+    @StepScope
     @Bean
-    public MongoItemWriter<Book> writer() {
-        return new MongoItemWriterBuilder<Book>()
+    public ItemProcessor<Book, MongoBook> processor(TransformBookService transformBookService) {
+        return transformBookService::makeMangoBookFromJpaBook;
+    }
+
+    @StepScope
+    @Bean
+    public MongoItemWriter<MongoBook> writer() {
+        return new MongoItemWriterBuilder<MongoBook>()
                 .template(mongoTemplate)
                 .collection("book")
                 .build();
@@ -59,10 +74,11 @@ public class BatchConfiguration {
 
 
     @Bean
-    public Job bookJob() {
+    public Job bookJob(Step transformBookStep) {
         return jobBuilderFactory.get("bookJob")
                 .incrementer(new RunIdIncrementer())
-                .start(step1())
+                .flow(transformBookStep)
+                .end()
                 .listener(new JobExecutionListener() {
                     @Override
                     public void beforeJob(@NonNull JobExecution jobExecution) {
@@ -78,11 +94,13 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public Step step1() {
-        return stepBuilderFactory.get("step1")
+    public Step transformBookStep(ItemReader<Book> reader, ItemWriter<MongoBook> writer,
+                                  ItemProcessor <Book, MongoBook> itemProcessor) {
+        return stepBuilderFactory.get("transformBookStep")
                 .<Book, Book>chunk(CHUNK_SIZE)
-                .reader(reader())
-                .writer(writer())
+                .reader(reader)
+                .processor(itemProcessor)
+                .writer(writer)
                 .listener(new ItemReadListener<>() {
                     public void beforeRead() {
                         logger.info("Начало чтения");

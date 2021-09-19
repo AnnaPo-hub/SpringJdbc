@@ -1,12 +1,14 @@
 package ru.otus.SpringJdbc.HomeworkSpringJdbc.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@Builder
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
