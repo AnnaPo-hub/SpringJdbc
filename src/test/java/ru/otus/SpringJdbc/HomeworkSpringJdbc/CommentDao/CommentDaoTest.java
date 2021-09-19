@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ComponentScan(basePackages = {"ru.otus.SpringJdbc.HomeworkSpringJdbc"})
 class CommentDaoTest {
     private static Comment insertedComment;
-    private Author author = new Author((long) 1, "Blok", null);
+    private Author author = new Author((long) 1, "Blok");
     private Genre genre = new Genre((long) 1, "Poetry");
     private Book testBook = new Book((long) 3, "BookforInsertCommentTest", author, genre, null);
     private Comment testComment = new Comment((long) 2, LocalDate.now(), "Must read", "Vasya", testBook);

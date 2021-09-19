@@ -12,7 +12,6 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Genre;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,8 +35,8 @@ class BookDaoTest {
     @Autowired
     private GenreService genreService;
 
-    private Author author = new Author((long) 1, "Blok", null);
-    private Author existingAuthor = new Author((long) 2, "Dostoevskiy", null);
+    private Author author = new Author((long) 1, "Blok");
+    private Author existingAuthor = new Author((long) 2, "Dostoevskiy");
     private Genre genre = new Genre((long) 1, "Poetry");
     private Book testbook = new Book((long) 6, "BookforInsertTest", author, genre, null);
 
@@ -58,17 +57,6 @@ class BookDaoTest {
     void shouldFindBookByName() {
         final List<Book> the_lady_unknown = bookDao.getByName("The nature");
         Assertions.assertFalse(the_lady_unknown.isEmpty(), "Не удалось найти книгу по указанному названию");
-    }
-
-    @Test
-    void shouldFindBookByAuthor() {
-        final Genre insertedGenre = genreService.insert(genre);
-        final Author pushkin = authorService.insert(new Author((long) 3, "Pushkin", null));
-        List<Book> books = new ArrayList<>();
-        books.add(bookDao.save(new Book((long) 7, "Captain's Daughter", pushkin, insertedGenre, null)));
-        em.refresh(pushkin);
-        final List<Book> bookByAuthor = bookService.findBookByAuthor(pushkin);
-        Assertions.assertFalse(bookByAuthor.isEmpty(), "Не удалось найти книгу по указанному автору");
     }
 
     @Test

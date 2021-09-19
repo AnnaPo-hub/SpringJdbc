@@ -32,13 +32,6 @@ public class BookServiceImpl implements BookService {
         return bookDao.getByName(bookName);
     }
 
-
-    @Override
-    public List<Book> findBookByAuthor(Author author) {
-        return author.getBooks();
-    }
-
-
     @Override
     public List<Book> findBookByGenre(String genre) {
         return bookDao.getByGenreName(genre);

@@ -27,7 +27,7 @@ class AuthorDaoTest {
 
     @BeforeEach
     void setUp() {
-        testAuthor = new Author((long) 3, "Lermontov", null);
+        testAuthor = new Author((long) 3, "Lermontov");
         authorDao.save(testAuthor);
     }
 

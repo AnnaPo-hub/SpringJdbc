@@ -2,7 +2,6 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc.service;
 
 
 import org.springframework.stereotype.Service;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Author;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 
 import java.util.List;
@@ -14,8 +13,6 @@ public interface BookService  {
     List<Book> showAllBooks();
 
     List<Book> findBookByName(String bookName);
-
-    List<Book> findBookByAuthor(Author author);
 
     List<Book> findBookByGenre(String genre);
 
