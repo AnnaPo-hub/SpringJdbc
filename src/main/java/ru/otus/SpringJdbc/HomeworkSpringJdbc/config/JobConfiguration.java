@@ -21,7 +21,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.lang.NonNull;
-import ru.otus.SpringJdbc.HomeworkSpringJdbc.dao.BookDao;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.Book;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.MongoBook;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.service.TransformBookService;
@@ -95,9 +94,9 @@ public class JobConfiguration {
 
     @Bean
     public Step transformBookStep(ItemReader<Book> reader, ItemWriter<MongoBook> writer,
-                                  ItemProcessor <Book, MongoBook> itemProcessor) {
+                                  ItemProcessor<Book, MongoBook> itemProcessor) {
         return stepBuilderFactory.get("transformBookStep")
-                .<Book, Book>chunk(CHUNK_SIZE)
+                .<Book, MongoBook>chunk(CHUNK_SIZE)
                 .reader(reader)
                 .processor(itemProcessor)
                 .writer(writer)
@@ -132,7 +131,7 @@ public class JobConfiguration {
                         logger.info("Начало обработки");
                     }
 
-                    public void afterProcess(@NonNull Book o, Book o2) {
+                    public void afterProcess(@NonNull Book o, MongoBook o2) {
                         logger.info("Конец обработки");
                     }
 

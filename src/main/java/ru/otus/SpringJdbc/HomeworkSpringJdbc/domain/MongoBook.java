@@ -21,8 +21,8 @@ public class MongoBook {
     private String name;
 
     @Field(name = "author_id")
-    private Author author;
+    private MongoAuthor author;
 
     @Field(name = "genre_id")
-    private Genre genre;
+    private MongoGenre genre;
 }
