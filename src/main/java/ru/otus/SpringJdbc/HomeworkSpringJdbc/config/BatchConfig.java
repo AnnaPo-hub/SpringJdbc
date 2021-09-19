@@ -15,5 +15,4 @@ public class BatchConfig {
         processor.setJobRegistry(jobRegistry);
         return processor;
     }
-
 }

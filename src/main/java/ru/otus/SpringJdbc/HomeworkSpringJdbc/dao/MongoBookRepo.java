@@ -2,10 +2,12 @@ package ru.otus.SpringJdbc.HomeworkSpringJdbc.dao;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
+import org.springframework.stereotype.Component;
 import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.MongoBook;
 
 import java.util.List;
 
+@Component
 public interface MongoBookRepo extends MongoRepository<MongoBook, String> {
     List<MongoBook> getByName(String bookName);
 

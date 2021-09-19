@@ -8,11 +8,11 @@ import ru.otus.SpringJdbc.HomeworkSpringJdbc.domain.MongoGenre;
 
 @Service
 public class TransformBookService {
-    public MongoBook makeMangoBookFromJpaBook(Book book){
+    public MongoBook makeMangoBookFromJpaBook(Book book) {
         return MongoBook.builder()
                 .id(book.getId())
                 .name(book.getName())
-                .author(new MongoAuthor(book.getAuthor().getId(),book.getAuthor().getName()))
+                .author(new MongoAuthor(book.getAuthor().getId(), book.getAuthor().getName()))
                 .genre(new MongoGenre(book.getGenre().getId(), book.getGenre().getName()))
                 .build();
     }
